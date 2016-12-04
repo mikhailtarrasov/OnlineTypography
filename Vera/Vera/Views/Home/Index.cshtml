@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+</head>
+<body>
+    <table>
+        <tr>
+            <td><p>Идентификатор</p></td>
+            <td><p>Код валюты</p></td>
+            <td><p>Цена в рублях</p></td><td></td>
+        </tr>
+            @foreach (var c in ViewBag.Currencies)
+            {
+                <tr>
+                    <td><p>@c.Id</p></td>
+                    <td><p>@c.Name</p></td>
+                    <td><p>@c.Rate</p></td>
+                </tr>
+            }
+        </table>
+</body>
+</html>
