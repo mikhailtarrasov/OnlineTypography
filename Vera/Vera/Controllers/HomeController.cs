@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using Vera.Domain;
 using Vera.Domain.Entity;
 
@@ -14,6 +18,8 @@ namespace Vera.Controllers
         //
         // GET: /Home/
 
+        DatabaseContext db = new DatabaseContext();
+
         public ActionResult Index()
         {
 
@@ -21,11 +27,15 @@ namespace Vera.Controllers
             //FillInTheDatabase();
             /*--------------------------------Заполняем БД----------------------------------*/
 
-            var context = new DatabaseContext();
+            ViewBag.Format = new SelectList(db.Formats, "Id", "Name");
+            //ViewBag.FormingType = new SelectList(context.FormingTypes, "Id", "Name");
 
-            ViewBag.Format = new SelectList(context.Formats, "Id", "Name");
-            ViewBag.FormingType = new SelectList(context.FormingTypes, "Id", "Name");
             return View();
+        }
+
+        public ActionResult SetGluePrice(int id)
+        {
+            return PartialView(db.GluePrices.FirstOrDefault(x => x.Format.Id == id));
         }
 
         public void FillInTheDatabase()

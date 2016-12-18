@@ -13,39 +13,24 @@
 <div style="margin: 0 auto; width: 600px; border: 1px solid gainsboro; text-align: center;">
   <h1>Формат</h1>
   @Html.DropDownList("Format", "--Выберите формат--")<Br/>
-  <h1>Блок</h1>
-  <h2>Формировка блока</h2>
-  @Html.DropDownList("FormingType", "--Выберите тип формировки блока--")<br/>
-    
-  Стоимость изделия: <h2 id="text_comment">Text comment</h2>
+  <h2 id="price"></h2>
 </div>
 
-
-
-
-
-
-
-<script>
-    $("#Format").change(function() {
-        var str = "";
-        $("#Format option:selected").each(function() {
-            str += $(this).text() + "\n";
-        });
-        $("#text_comment").text(str);
-        $.ajax({
-            method: "POST",
-            url: '',
-            dataType: 'json',
-            data:{
-                selected: str
-            },
-            success: function(data, textStatus) {
-                $('#text_comment').text(textStatus);
-            }
+<script type="text/javascript">
+    $(function () {
+        $('#Format').change(function () {
+            // получаем выбранный id
+            var id = $(this).val();
+            console.log(id);    // -
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("SetGluePrice")/' + id,
+                success: function (data) {
+                    $('#price').text(data);// заменяем содержимое присланным частичным представлением
+                }
+            });
         });
     })
-    .trigger('change');
 </script>
 
 </body>
