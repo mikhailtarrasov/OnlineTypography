@@ -28,7 +28,7 @@ namespace Vera.Controllers
             /*--------------------------------Заполняем БД----------------------------------*/
 
             ViewBag.Format = new SelectList(db.Formats, "Id", "Name");
-            //ViewBag.FormingType = new SelectList(context.FormingTypes, "Id", "Name");
+            ViewBag.FormingType = new SelectList(db.FormingTypes, "Id", "Name");
 
             return View();
         }
@@ -38,12 +38,29 @@ namespace Vera.Controllers
             return PartialView(db.GluePrices.FirstOrDefault(x => x.Format.Id == id));
         }
 
+        public ActionResult FormingType(int id)
+        {
+            return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
+        }
+
+        public decimal SetSewingPrice(int tetrCountInt)
+        {
+            if (tetrCountInt == null) return 0m;
+            var idForming = 2;
+            var sewing = db.Sewings.FirstOrDefault(x => x.FormingType.Id == idForming);
+            if (sewing != null) return sewing.Price.Cost * sewing.Price.Currency.Rate * tetrCountInt;
+            else MessageBox.Show("Не было найдено цены за шитьё, для такого идентификатора формата");
+            
+            return 0m;
+        }
+
         public void FillInTheDatabase()
         {
             DatabaseContext context = new DatabaseContext();
-
-            context.FormingTypes.Add(new FormingType() { Name = "Постраничный" });
-            context.FormingTypes.Add(new FormingType() { Name = "Потетрадный" });
+            
+            //context.
+            //context.FormingTypes.Add(new FormingType() { Name = "Постраничный" });
+            //context.FormingTypes.Add(new FormingType() { Name = "Потетрадный" });
 
             //context.Currencies.Add(new Currency() { Name = "RUB", Rate = 1m });
             //context.Currencies.Add(new Currency() { Name = "EUR", Rate = 68.47m });
@@ -73,6 +90,4 @@ namespace Vera.Controllers
             context.Dispose();
         }
     }
-
-   
 }

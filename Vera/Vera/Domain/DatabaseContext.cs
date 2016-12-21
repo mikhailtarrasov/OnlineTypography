@@ -17,5 +17,6 @@ namespace Vera.Domain
         public DbSet<GluePrice> GluePrices { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<FormingType> FormingTypes { get; set; }
+        public DbSet<Sewing> Sewings { get; set; }
     }
 }

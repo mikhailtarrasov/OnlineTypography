@@ -1,0 +1,51 @@
+﻿<div id="formingTypeBlock">
+    <h1>@Model.Name тип формировки блока</h1>
+    <form name="block" method="POST">
+        <p>
+            <b>Кол-во листов: </b>
+        </p>
+        <input type="text"/>
+        @if (Model.Name == "Потетрадный")
+        {
+            <br/>
+            <input type="checkbox" value="Фальцовка" readonly/>
+            @:Фальцовка
+            <p>
+                <b>Кол-во тетрадей: </b>
+            </p>
+        }
+        <input type="text" id="tetr" @if (Model.Name == "Постраничный")
+                                     {
+                                         @:value = "1"
+                                         @:readonly
+                                         @:hidden
+                                     }/>
+        <br/>
+
+        <p>Блок: </p>
+
+        <span id="blockPrice"></span>
+        <!--<input type="submit" value="Отправить"/>-->
+    </form>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#tetr').on('keyup input', function () {
+                var tetrCountStr = $(this).val();
+                //var id = $('#FormingType').val();
+                var tetrCountInt = parseInt(tetrCountStr);
+                console.log(tetrCountInt);
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("SetSewingPrice")/' + tetrCountInt,
+                    success: function (data) {
+                        console.log("data: ");
+                        console.log(data);
+                        $('#blockPrice').empty();
+                        $('#blockPrice').text(data);
+                    }
+                });
+            });
+        });
+    </script>
+</div>
