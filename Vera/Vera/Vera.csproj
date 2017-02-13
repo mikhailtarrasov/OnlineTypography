@@ -135,6 +135,7 @@
     <Compile Include="Domain\Entity\FormingType.cs" />
     <Compile Include="Domain\Entity\GluePrice.cs" />
     <Compile Include="Domain\DatabaseContext.cs" />
+    <Compile Include="Domain\Entity\Job.cs" />
     <Compile Include="Domain\Entity\Price.cs" />
     <Compile Include="Domain\Entity\Sewing.cs" />
     <Compile Include="Global.asax.cs">
@@ -151,6 +152,10 @@
     <Compile Include="Migrations\201612182119495_0.3_Add_Sewing.cs" />
     <Compile Include="Migrations\201612182119495_0.3_Add_Sewing.Designer.cs">
       <DependentUpon>201612182119495_0.3_Add_Sewing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702131613446_0.4_Add_Job_Entity.cs" />
+    <Compile Include="Migrations\201702131613446_0.4_Add_Job_Entity.Designer.cs">
+      <DependentUpon>201702131613446_0.4_Add_Job_Entity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -194,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612182119495_0.3_Add_Sewing.resx">
       <DependentUpon>201612182119495_0.3_Add_Sewing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702131613446_0.4_Add_Job_Entity.resx">
+      <DependentUpon>201702131613446_0.4_Add_Job_Entity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

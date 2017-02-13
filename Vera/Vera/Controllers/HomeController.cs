@@ -57,49 +57,69 @@ namespace Vera.Controllers
             return 0m;
         }
 
+        public decimal SetPageCountPrice(int id)
+        {
+            var job = db.Jobs.FirstOrDefault(x => x.JobTitle == "Подбор блока");
+            return job.Pay.Cost*job.Pay.Currency.Rate*id; 
+        }
+
         public void FillInTheDatabase()
         {
-            DatabaseContext context = new DatabaseContext();
-            var rubCurrency = context.Currencies.FirstOrDefault(x => x.Name == "RUB");
-            var potetrFormingType = context.FormingTypes.FirstOrDefault(x => x.Name == "Потетрадный");
-            context.Sewings.Add(new Sewing()
-            {
-                FormingType = potetrFormingType, 
-                Price = new Price()
-                {
-                    Cost = 99.90m, 
-                    Currency = rubCurrency
-                }
-            } );
-            //context.FormingTypes.Add(new FormingType() { Name = "Постраничный" });
-            //context.FormingTypes.Add(new FormingType() { Name = "Потетрадный" });
+            //var sewingTetr = db.Sewings.FirstOrDefault(x => x.FormingType.Name == "Потетрадный");
+            //sewingTetr.Price.Cost = 2.50m;
+            //var rubCurrency = db.Currencies.FirstOrDefault(x => x.Name == "RUB");
+            //var postrFormingType = db.FormingTypes.FirstOrDefault(x => x.Name == "Постраничный");
+            //db.Sewings.Add(new Sewing()
+            //{
+            //    FormingType = postrFormingType,
+            //    Price = new Price()
+            //    {
+            //        Cost = 50m,
+            //        Currency = rubCurrency
+            //    }
+            //});
+            //db.FormingTypes.Add(new FormingType() { Name = "Постраничный" });
+            //db.FormingTypes.Add(new FormingType() { Name = "Потетрадный" });
 
-            //context.Currencies.Add(new Currency() { Name = "RUB", Rate = 1m });
-            //context.Currencies.Add(new Currency() { Name = "EUR", Rate = 68.47m });
+            //db.Currencies.Add(new Currency() { Name = "RUB", Rate = 1m });
+            //db.Currencies.Add(new Currency() { Name = "EUR", Rate = 68.47m });
 
-            //context.SaveChanges();
+            //db.SaveChanges();
 
-            //var rubCurrency = context.Currencies.FirstOrDefault(x => x.Name == "RUB");
+            //var rubCurrency = db.Currencies.FirstOrDefault(x => x.Name == "RUB");
 
             //decimal cost = 10.24m;
             //double area = 999949;
             //for (int i = 0; i < 11; i++)
             //{
-            //    context.Prices.Add(new Price() { Cost = cost, Currency = rubCurrency });
-            //    context.Formats.Add(new Format() { Name = "A" + i, Area = area });
-            //    context.SaveChanges();
+            //    db.Prices.Add(new Price() { Cost = cost, Currency = rubCurrency });
+            //    db.Formats.Add(new Format() { Name = "A" + i, Area = area });
+            //    db.SaveChanges();
 
-            //    context.GluePrices.Add(new GluePrice()
+            //    db.GluePrices.Add(new GluePrice()
             //    {
-            //        Format = context.Formats.FirstOrDefault(x => x.Name == "A" + i),
-            //        Price = context.Prices.FirstOrDefault(x => x.Cost == cost)
+            //        Format = db.Formats.FirstOrDefault(x => x.Name == "A" + i),
+            //        Price = db.Prices.FirstOrDefault(x => x.Cost == cost)
             //    });
 
             //    cost /= 2;
             //    area /= 2;
             //}
-            context.SaveChanges();
-            context.Dispose();
+
+            //db.Jobs.Add(new Job()
+            //{
+            //    JobTitle = "Подбор блока",
+            //    Pay = new Price()
+            //    {
+            //        Cost = 0.02m,
+            //        Currency = db.Currencies.FirstOrDefault(x => x.Name == "RUB")
+            //    }
+            //});
+            //db.SaveChanges();
+
+            // TO DO HERE
+
+            //db.Dispose();
         }
     }
 }

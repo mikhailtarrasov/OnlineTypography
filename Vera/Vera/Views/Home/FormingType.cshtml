@@ -4,7 +4,7 @@
         <p>
             <b>Кол-во листов: </b>
         </p>
-        <input type="text"/>
+        <input type="text" id="countOfPage"/>
         @if (Model.Name == "Потетрадный")
         {
             <br/>
@@ -14,40 +14,21 @@
                 <b>Кол-во тетрадей: </b>
             </p>
         }
-        <input type="text" id="tetr" 
+        <input type="text" id="tetr"
+               value="1"
                onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                @if (Model.Name == "Постраничный")
                                      {
-                                         @:value = "1"
                                          @:readonly
                                          @:hidden
                                      } />
         <br/>
 
-        <p>Блок: </p>
+        <p>Подбор блока: </p>
+        <span id="countOfPagePrice"></span>
 
+        <p>Формировка блока: </p>
         <span id="blockPrice"></span>
-        <!--<input type="submit" value="Отправить"/>-->
     </form>
-
-    <script type="text/javascript">
-        $(function () {
-            $('#tetr').on('keyup input', function () {
-                var tetrCountStr = $(this).val();
-                var formingType = $('#FormingType').val();
-                //var tetrCountInt = parseInt(tetrCountStr);
-                //console.log(tetrCountInt);
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("SetSewingPrice")/' + tetrCountStr + formingType,
-                    success: function (data) {
-                        console.log("data: ");
-                        console.log(data);
-                        $('#blockPrice').empty();
-                        $('#blockPrice').text(data);
-                    }
-                });
-            });
-        });
-    </script>
 </div>
+<script src="~/Scripts/myScript.js"></script>
