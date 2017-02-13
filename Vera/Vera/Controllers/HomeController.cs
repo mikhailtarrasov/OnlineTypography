@@ -43,13 +43,16 @@ namespace Vera.Controllers
             return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
         }
 
-        public decimal SetSewingPrice(int tetrCountInt)
+        public decimal SetSewingPrice(string id)
         {
-            if (tetrCountInt == null) return 0m;
-            var idForming = 2;
+            int response = Int32.Parse(id);
+
+            int idForming = response%10;
+            int tetrCountInt = response/10;
+
             var sewing = db.Sewings.FirstOrDefault(x => x.FormingType.Id == idForming);
-            if (sewing != null) return sewing.Price.Cost * sewing.Price.Currency.Rate * tetrCountInt;
-            else MessageBox.Show("Не было найдено цены за шитьё, для такого идентификатора формата");
+            if (sewing != null) return sewing.Price.Cost*sewing.Price.Currency.Rate*tetrCountInt;
+            //else MessageBox.Show("Не было найдено цены за шитьё, для такого идентификатора формата");
             
             return 0m;
         }
@@ -57,8 +60,17 @@ namespace Vera.Controllers
         public void FillInTheDatabase()
         {
             DatabaseContext context = new DatabaseContext();
-            
-            //context.
+            var rubCurrency = context.Currencies.FirstOrDefault(x => x.Name == "RUB");
+            var potetrFormingType = context.FormingTypes.FirstOrDefault(x => x.Name == "Потетрадный");
+            context.Sewings.Add(new Sewing()
+            {
+                FormingType = potetrFormingType, 
+                Price = new Price()
+                {
+                    Cost = 99.90m, 
+                    Currency = rubCurrency
+                }
+            } );
             //context.FormingTypes.Add(new FormingType() { Name = "Постраничный" });
             //context.FormingTypes.Add(new FormingType() { Name = "Потетрадный" });
 
