@@ -57,10 +57,13 @@ namespace Vera.Controllers
             return 0m;
         }
 
-        public decimal SetPageCountPrice(int id)
+        public decimal SetPageCountPrice(int? id)
         {
+            int pageCount;
+            if (id == null) pageCount = 0;
+            else pageCount = (int)id;
             var job = db.Jobs.FirstOrDefault(x => x.JobTitle == "Подбор блока");
-            return job.Pay.Cost*job.Pay.Currency.Rate*id; 
+            return job.Pay.Cost * job.Pay.Currency.Rate * pageCount; 
         }
 
         public void FillInTheDatabase()

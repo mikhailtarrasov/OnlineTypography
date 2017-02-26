@@ -10,12 +10,11 @@
 </head>
  
 <body>
-    <nav>
-        <ul>
-            <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-        </ul>
-    </nav>
-    @RenderBody
-    @RenderSection("scripts")
+
+
+    @RenderBody()
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/myScript.js"></script>
+    
 </body>
 </html>

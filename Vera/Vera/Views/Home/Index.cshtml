@@ -2,15 +2,15 @@
 @using System.Web.Optimization
 @{
     ViewBag.Title = "Index";
-    Layout = null;
+    Layout = "../Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/myScript.js")"></script>
+    
+    
     <style>
         #Format {
             width: 200px;
@@ -63,13 +63,5 @@
     <p>Итого: </p>
     <span id="totalPrice"></span>
 </div>
-
-    
-<script type="text/javascript">
-    
-
-    
-</script>
-
 </body>
 </html>

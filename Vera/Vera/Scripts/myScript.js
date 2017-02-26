@@ -1,5 +1,47 @@
-﻿
+﻿function countPageInit() {
+    $('#countOfPage').on('keyup input', function () {
+        setPageCountPrice();
+    });
+};
+
+function setPageCountPrice() {
+    var countOfPage = $('#countOfPage').val();
+    console.log(countOfPage);
+    $.ajax({
+        type: 'POST',
+        url: "/Home/SetPageCountPrice/" + countOfPage,
+        success: function (data) {
+            console.log("data: ", data);
+            $('#countOfPagePrice').text(data);
+        }
+    });
+}
+
+function blockFormingInit() {
+    $('#tetr').on('keyup input', function () {
+        setBlockFormingPrice();
+    });
+};
+
+function setBlockFormingPrice() {
+    var tetrCountStr = $('#tetr').val();
+
+    var formingType = $('#FormingType').val();
+    console.log("tetr count = ", tetrCountStr, "\nforming type = ", formingType);
+    $.ajax({
+        type: 'POST',
+        url: "/Home/SetSewingPrice/" + tetrCountStr + formingType,
+        success: function (data) {
+            console.log("data: ", data);
+            $('#blockPrice').text(data);
+        }
+    });
+};
+
 $(function () {
+    //countPageInit();
+    //blockFormingInit();
+
     $('#Format').change(function () {
         // получаем выбранный id
         var id = $(this).val();
@@ -14,9 +56,7 @@ $(function () {
             }
         });
     });
-});
 
-$(function () {
     $('#FormingType').change(function () {
         var id = $(this).val();
 
@@ -26,92 +66,13 @@ $(function () {
             success: function (data) {
                 $('#formingTypeBlock').replaceWith(data), // заменяем содержимое присланным частичным представлением
 
-                $(function () {
-                    var tetrCountStr = 1;
-                    var formingType = $('#FormingType').val();
-                    console.log("tetr count = ", tetrCountStr, "\nforming type = ", formingType);
-                    $.ajax({
-                        type: 'POST',
-                        url: "/Home/SetSewingPrice/" + tetrCountStr + formingType,
-                        success: function (data) {
-                            console.log("data: ", data);
-                            //$('#blockPrice').empty();
-                            $('#blockPrice').text(data);
-                        }
-                    });
-                });
-            }
-        });
+                setPageCountPrice();
+                setBlockFormingPrice();
 
-        
-    });
-});
-
-$(function setPageCountPrice() {
-    var countOfPage = $('#countOfPage').val();
-    console.log(countOfPage);
-    $.ajax({
-        type: 'POST',
-        url: "/Home/SetPageCountPrice/" + countOfPage,
-        success: function (data) {
-            console.log("data: ");
-            console.log(data);
-            $('#countOfPagePrice').empty();
-            $('#countOfPagePrice').text(data);
-        }
-    });
-});
-
-$(function () {
-    $('#tetr').on('keyup input', function () {
-        var tetrCountStr = $(this).val();
-        var formingType = $('#FormingType').val();
-        //var tetrCountInt = parseInt(tetrCountStr);
-        //console.log(tetrCountInt);
-        $.ajax({
-            type: 'POST',
-            url: "/Home/SetSewingPrice/" + tetrCountStr + formingType,
-            success: function (data) {
-                console.log("data: ");
-                console.log(data);
-                $('#blockPrice').empty();
-                $('#blockPrice').text(data);
+                countPageInit();
+                blockFormingInit();
             }
         });
     });
-});
 
-$(function () {
-    $('#countOfPage').on('keyup input', function () {
-        var countOfPage = $(this).val();
-        console.log(countOfPage);
-        $.ajax({
-            type: 'POST',
-            url: "/Home/SetPageCountPrice/" + countOfPage,
-            success: function (data) {
-                console.log("data: ");
-                console.log(data);
-                $('#countOfPagePrice').empty();
-                $('#countOfPagePrice').text(data);
-            }
-        });
-    });
 });
-
-//$(function () {
-//    $('#tetr').keyup(function () {
-//        var tetrCount = $('#tetr').val();
-//        var id = $('#Format').val();
-//        console.log(tetrCount);
-//        console.log(id);
-//        $.ajax({
-//            type: 'POST',
-//            url: '@Url.Action("SetSewingPrice")/' + id + '/' + tetrCount,
-//            success: function (data) {
-//                console.log(data);
-//                $('#blockPrice').empty();
-//                $('#blockPrice').text(data);
-//            }
-//        });
-//    });
-//});

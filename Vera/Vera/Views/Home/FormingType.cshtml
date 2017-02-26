@@ -1,10 +1,14 @@
-﻿<div id="formingTypeBlock">
+﻿
+
+<div id="formingTypeBlock">
     <p>@Model.Name тип формировки блока</p>
     <form name="block" method="POST">
         <p>
             <b>Кол-во листов: </b>
         </p>
-        <input type="text" id="countOfPage"/>
+        <input  type="text"
+                id="countOfPage"
+                onkeypress='return event.charCode >= 48 && event.charCode <= 57'/>
         @if (Model.Name == "Потетрадный")
         {
             <br/>
@@ -31,4 +35,3 @@
         <span id="blockPrice"></span>
     </form>
 </div>
-<script src="~/Scripts/myScript.js"></script>
