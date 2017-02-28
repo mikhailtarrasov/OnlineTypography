@@ -22,46 +22,80 @@
     </style>
 </head>
 <body>
+<div class="container main">
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="container-fluid">
+                <h2>Изделия</h2>
+            </div>
+        </div>
+        <div class="col-xs-6" style="border: 1px solid gainsboro;">
+            <div style="margin: 0 auto; text-align: center;">
+                <h2>Расчет изделия</h2>
 
-<div style="margin: 0 auto; width: 600px; border: 1px solid gainsboro; text-align: center;">
+                <h3>Формат</h3>
+                <div style="height: 1px; width: 458px; background: black;"></div>
+                @Html.DropDownList("Format", "--Выберите формат--")<Br/>
+                <p id="price"></p><br/>
 
-    <h1>Формат</h1>
-    <div style="height: 1px; width: 600px; background: black;"></div>
-    @Html.DropDownList("Format", "--Выберите формат--")<Br/>
-    <p id="price"></p><br/>
+                <h3>Блок</h3>
+                <div style="height: 1px; width: 458px; background: black;"></div>
+                @Html.DropDownList("FormingType", "--Выберите тип формировки блока--")
+                <div id="formingTypeBlock"></div><br/>
 
-    <h1>Блок</h1>
-    <div style="height: 1px; width: 600px; background: black;"></div>
-    @Html.DropDownList("FormingType", "--Выберите тип формировки блока--")
-    <div id="formingTypeBlock"></div><br/>
-
-    <h1>Обложка</h1>
-    <div style="height: 1px; width: 600px; background: black;"></div>
-    <p>Основа обложки</p>
-    <select style="width: 200px;" name="hero[]">
-        <option value>Выберите материал</option>
-        <option value="без">Картон без поролона</option>
-        <option value="на">Картон на поролоне</option>\
-    </select><br/>
+                <h3>Обложка</h3>
+                <div style="height: 1px; width: 458px; background: black;"></div>
+                <p>Основа обложки</p>
+                <select style="width: 200px;" name="hero[]">
+                    <option value>Выберите материал</option>
+                    <option value="без">Картон без поролона</option>
+                    <option value="на">Картон на поролоне</option>\
+                </select><br/>
     
-    <p>Внешний материал</p>
-    <select style="width: 200px;" name="hero1[]">
-        <option value>Выберите материал</option>
-        <option value="Кожа">Кожа</option>
-        <option value="винил">Бум. винил</option>\
-   </select><br/>
+                <p>Внешний материал</p>
+                <select style="width: 200px;" name="hero1[]">
+                    <option value>Выберите материал</option>
+                    <option value="Кожа">Кожа</option>
+                    <option value="винил">Бум. винил</option>\
+               </select><br/>
     
-    <input type="checkbox"/>Нанесение логотипа<br/>
-    <select style="width: 200px;" name="hero2[]">
-        <option value>Выберите тип нанесения</option>
-        <option value="Тиснение">Тиснение</option>
-        <option value="УФ-печать">УФ-печать</option>\
-    </select><br/>
+                <input type="checkbox"/>Нанесение логотипа<br/>
+                <select style="width: 200px;" name="hero2[]">
+                    <option value>Выберите тип нанесения</option>
+                    <option value="Тиснение">Тиснение</option>
+                    <option value="УФ-печать">УФ-печать</option>\
+                </select><br/>
     
-    <input type="checkbox"/>Декоративная строчка
+                <input type="checkbox"/>Декоративная строчка
 
-    <p>Итого: </p>
-    <span id="totalPrice"></span>
+                <p>Итого: </p>
+                <span id="totalPrice"></span>
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="container-fluid">
+                <h2>Цены</h2>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                    <span class="badge" id="gluePrice"></span>
+                    Цена клея за формат
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" id="countOfPagePrice"></span>
+                        Подбор блока
+                    </li>
+                    <li class="list-group-item" id="fillisterLi">
+                        <span class="badge" id="fillisterPrice"></span>
+                        Фальцовка
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" id="blockPrice"></span>
+                        Формировка блока
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

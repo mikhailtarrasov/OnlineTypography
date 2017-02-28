@@ -20,6 +20,7 @@ function setPageCountPrice() {
 function blockFormingInit() {
     $('#tetr').on('keyup input', function () {
         setBlockFormingPrice();
+        setFillisterPrice();
     });
 };
 
@@ -38,9 +39,33 @@ function setBlockFormingPrice() {
     });
 };
 
-$(function () {
+function setFillisterPrice() {
+    $('#fillisterLi').css("display", "none");
+    if ($('#FormingType').val() == 2) {
+        $('#fillisterLi').css("display", "block");
+
+        var tetrCount = $('#tetr').val();
+        if ($('#fillister').is(':checked') == true) {
+            $.ajax({
+                type: 'POST',
+                url: "/Home/SetFillisterPrice/" + tetrCount,
+                success: function (data) {
+                    console.log(data);
+                    $('#fillisterPrice').text(data);
+                }
+            });
+        } else {
+            $('#fillisterPrice').text(0);
+        }
+    } else {
+        $('#fillisterPrice').text(0);
+    }
+}
+
+$(function() {
     //countPageInit();
     //blockFormingInit();
+    setFillisterPrice();
 
     $('#Format').change(function () {
         // получаем выбранный id
@@ -51,7 +76,7 @@ $(function () {
             url: "/Home/SetGluePrice/" + id,
             success: function (data) {
                 console.log(data);
-                $('#price').text(data);// заменяем содержимое присланным частичным представлением
+                $('#gluePrice').text(data);// заменяем содержимое присланным частичным представлением
                 console.log($('#price').val());
             }
         });
@@ -68,9 +93,13 @@ $(function () {
 
                 setPageCountPrice();
                 setBlockFormingPrice();
+                setFillisterPrice();
 
                 countPageInit();
                 blockFormingInit();
+                $('#fillister').change(function () {
+                    setFillisterPrice();
+                });
             }
         });
     });
