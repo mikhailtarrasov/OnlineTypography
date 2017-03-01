@@ -51,23 +51,28 @@
                     <option value="без">Картон без поролона</option>
                     <option value="на">Картон на поролоне</option>\
                 </select><br/>
-    
+
                 <p>Внешний материал</p>
                 <select style="width: 200px;" name="hero1[]">
                     <option value>Выберите материал</option>
                     <option value="Кожа">Кожа</option>
                     <option value="винил">Бум. винил</option>\
-               </select><br/>
-    
+                </select><br/>
+
                 <input type="checkbox"/>Нанесение логотипа<br/>
                 <select style="width: 200px;" name="hero2[]">
                     <option value>Выберите тип нанесения</option>
                     <option value="Тиснение">Тиснение</option>
                     <option value="УФ-печать">УФ-печать</option>\
                 </select><br/>
-    
-                <input type="checkbox"/>Декоративная строчка
-
+                <br/>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" aria-label="..." id="decorativeStitching"> 
+                    </span>
+                    <input type="text" class="form-control" aria-label="..." value="Декоративная строчка" readonly="">
+                </div><!-- /input-group -->
+                <br/>
                 <p>Итого: </p>
                 <span id="totalPrice"></span>
             </div>
@@ -77,8 +82,8 @@
                 <h2>Цены</h2>
                 <ul class="list-group">
                     <li class="list-group-item">
-                    <span class="badge" id="gluePrice"></span>
-                    Цена клея за формат
+                        <span class="badge" id="gluePrice"></span>
+                        Цена клея за формат
                     </li>
                     <li class="list-group-item">
                         <span class="badge" id="countOfPagePrice"></span>
@@ -91,6 +96,10 @@
                     <li class="list-group-item">
                         <span class="badge" id="blockPrice"></span>
                         Формировка блока
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" id="decorativeStitchingPrice"></span>
+                        Декоративная строчка
                     </li>
                 </ul>
             </div>

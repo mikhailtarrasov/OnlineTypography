@@ -62,13 +62,19 @@ function setFillisterPrice() {
     }
 }
 
+function setDecorativeStitchingPrice() {
+    var text = $('#decorativeStitching').is(':checked');
+    $('#decorativeStitchingPrice').text(text);
+}
+
 $(function() {
     //countPageInit();
     //blockFormingInit();
     setFillisterPrice();
+    setDecorativeStitchingPrice();
 
     $('#Format').change(function () {
-        // получаем выбранный id
+        // получаем выбранный id - его значение
         var id = $(this).val();
         console.log(id);    // -
         $.ajax({
@@ -102,6 +108,11 @@ $(function() {
                 });
             }
         });
+    });
+
+    $('#decorativeStitching').change(function () {
+        console.log($('#decorativeStitching').is(':checked'));
+        setDecorativeStitchingPrice();
     });
 
 });

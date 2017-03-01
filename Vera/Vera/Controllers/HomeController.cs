@@ -36,6 +36,16 @@ namespace Vera.Controllers
             return View();
         }
 
+        public ActionResult Inventory()
+        {
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         public decimal SetGluePrice(int id)
         {
             var model = db.GluePrices.FirstOrDefault(x => x.Format.Id == id);
