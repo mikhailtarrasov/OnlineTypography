@@ -63,15 +63,48 @@ function setFillisterPrice() {
 }
 
 function setDecorativeStitchingPrice() {
-    var text = $('#decorativeStitching').is(':checked');
+    var text = $('#decorativeStitchingCheckbox').is(':checked');
     $('#decorativeStitchingPrice').text(text);
 }
+
+function setTrimmingBlockPrice() {
+    $.ajax({                                    // Подрезка блока
+        type: 'POST',
+        url: "/Home/SetTrimmingBlockPrice/",
+        success: function (data) {
+            console.log(data);
+            $('#trimmingBlockPrice').text(data);
+            console.log($('#price').val());
+        }
+    });
+}
+
+//function viewMoreForLogo() {
+//    switch ($('#logoCheckbox').is(':checked')) {
+//        case true:
+//            $.ajax({
+//                type: 'POST',
+//                url: "/Home/SetGluePrice/" + id,
+//                success: function (data) {
+//                    console.log(data);
+//                    $('#gluePrice').text(data);// заменяем содержимое присланным частичным представлением
+//                    console.log($('#price').val());
+//                }
+//            });
+//            break;
+//        case false:
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 $(function() {
     //countPageInit();
     //blockFormingInit();
-    setFillisterPrice();
-    setDecorativeStitchingPrice();
+    setFillisterPrice();                        // Фальцовка
+    setDecorativeStitchingPrice();              // Декоративная строчка true/false
+    setTrimmingBlockPrice();                    // Подрезка блока
 
     $('#Format').change(function () {
         // получаем выбранный id - его значение
@@ -110,9 +143,12 @@ $(function() {
         });
     });
 
-    $('#decorativeStitching').change(function () {
-        console.log($('#decorativeStitching').is(':checked'));
+    $('#decorativeStitchingCheckbox').change(function () {
+        console.log($('#decorativeStitchingCheckbox').is(':checked'));
         setDecorativeStitchingPrice();
     });
 
+    //$('#logoCheckbox').change(function() {
+    //    viewMoreForLogo();
+    //});
 });

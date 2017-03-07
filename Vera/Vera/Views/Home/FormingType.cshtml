@@ -9,17 +9,6 @@
                     autocomplete="off"
                     onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
         </div>
-        
-        @if (Model.Name == "Потетрадный")
-        {
-            <br/>
-            <div class="input-group">
-              <span class="input-group-addon">
-                <input type="checkbox" aria-label="..." id="fillister"> <!--fillister - фальцовка-->
-              </span>
-              <input type="text" class="form-control" aria-label="..." value="Фальцовка" readonly="">
-            </div><!-- /input-group -->
-        }
         <br/>
         <div @if (Model.Name == "Постраничный")
              {
@@ -38,5 +27,15 @@
                         @:readonly="readonly"
                     } />
         </div>
+        
+        @if (Model.Name == "Потетрадный")
+        {
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="fillister" value="Фальцовка">
+                    Фальцовка
+                </label>
+            </div>
+        }
     </form>
 </div>

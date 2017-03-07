@@ -9,17 +9,6 @@
 
 <html>
 <head>
-    
-    
-    <style>
-        #Format {
-            width: 200px;
-        }
-
-        #FormingType {
-            width: 200px;
-        }
-    </style>
 </head>
 <body>
 <div class="container main">
@@ -58,20 +47,26 @@
                     <option value="Кожа">Кожа</option>
                     <option value="винил">Бум. винил</option>\
                 </select><br/>
-
-                <input type="checkbox"/>Нанесение логотипа<br/>
+                <!--<div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="logoCheckbox" value="Нанесение логотипа">
+                        Нанесение логотипа
+                    </label>
+                </div>-->
+                <h4>Логотип</h4>
                 <select style="width: 200px;" name="hero2[]">
                     <option value>Выберите тип нанесения</option>
                     <option value="Тиснение">Тиснение</option>
                     <option value="УФ-печать">УФ-печать</option>\
                 </select><br/>
                 <br/>
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <input type="checkbox" aria-label="..." id="decorativeStitching"> 
-                    </span>
-                    <input type="text" class="form-control" aria-label="..." value="Декоративная строчка" readonly="">
-                </div><!-- /input-group -->
+                
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="decorativeStitchingCheckbox" value="Декоративная строчка">
+                        Декоративная строчка
+                    </label>
+                </div>
                 <br/>
                 <p>Итого: </p>
                 <span id="totalPrice"></span>
@@ -96,6 +91,10 @@
                     <li class="list-group-item">
                         <span class="badge" id="blockPrice"></span>
                         Формировка блока
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" id="trimmingBlockPrice"></span>
+                        Подрезка блока
                     </li>
                     <li class="list-group-item">
                         <span class="badge" id="decorativeStitchingPrice"></span>

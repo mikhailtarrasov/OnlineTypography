@@ -20,7 +20,8 @@ namespace Vera.Controllers
 
         DatabaseContext db = new DatabaseContext();
         // Фальцовка. Только для потетрадного типа формировки блока, умножается на кол-во тетрадей
-        private decimal fillisterPrice = 0.5m;   
+        private decimal fillisterPrice = 0.5m;      // Фальцовка
+        private decimal trimmingBlock = 10m;        // Подрезка блока
                                             
 
         public ActionResult Index()
@@ -49,10 +50,14 @@ namespace Vera.Controllers
         public decimal SetGluePrice(int id)
         {
             var model = db.GluePrices.FirstOrDefault(x => x.Format.Id == id);
-            return model.Price.Cost*model.Price.Currency.Rate;
+            return model.Price.Cost * model.Price.Currency.Rate;
         }
 
         public ActionResult FormingType(int id)
+        {
+            return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
+        }
+        public ActionResult Logolype(int id)
         {
             return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
         }
@@ -83,6 +88,11 @@ namespace Vera.Controllers
         public decimal SetFillisterPrice(int id)
         {
             return fillisterPrice*id;
+        }
+
+        public decimal SetTrimmingBlockPrice()
+        {
+            return trimmingBlock;
         }
 
         public void FillInTheDatabase()
