@@ -57,10 +57,11 @@ namespace Vera.Controllers
         {
             return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
         }
-        public ActionResult Logolype(int id)
-        {
-            return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
-        }
+
+        //public ActionResult Logotype(int id)
+        //{
+        //    return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
+        //}
 
         public decimal SetSewingPrice(string id)
         {
@@ -97,10 +98,21 @@ namespace Vera.Controllers
 
         public void FillInTheDatabase()
         {
-            //var sewingTetr = db.Sewings.FirstOrDefault(x => x.FormingType.Name == "Потетрадный");
-            //sewingTetr.Price.Cost = 2.50m;
+            //db.Currencies.Add(new Currency() { Name = "RUB", Rate = 1m });
+            ////db.Currencies.Add(new Currency() { Name = "EUR", Rate = 68.47m });
+            //db.Currencies.Add(new Currency() { Name = "EUR", Rate = 58.7m });
+
+            //db.SaveChanges();
+
             //var rubCurrency = db.Currencies.FirstOrDefault(x => x.Name == "RUB");
+            
+            //db.FormingTypes.Add(new FormingType() { Name = "Постраничный" });
+            //db.FormingTypes.Add(new FormingType() { Name = "Потетрадный" });
+
+            //db.SaveChanges();
+
             //var postrFormingType = db.FormingTypes.FirstOrDefault(x => x.Name == "Постраничный");
+            //var potetrFormingType = db.FormingTypes.FirstOrDefault(x => x.Name == "Потетрадный");
             //db.Sewings.Add(new Sewing()
             //{
             //    FormingType = postrFormingType,
@@ -110,15 +122,15 @@ namespace Vera.Controllers
             //        Currency = rubCurrency
             //    }
             //});
-            //db.FormingTypes.Add(new FormingType() { Name = "Постраничный" });
-            //db.FormingTypes.Add(new FormingType() { Name = "Потетрадный" });
-
-            //db.Currencies.Add(new Currency() { Name = "RUB", Rate = 1m });
-            //db.Currencies.Add(new Currency() { Name = "EUR", Rate = 68.47m });
-
-            //db.SaveChanges();
-
-            //var rubCurrency = db.Currencies.FirstOrDefault(x => x.Name == "RUB");
+            //db.Sewings.Add(new Sewing()
+            //{
+            //    FormingType = potetrFormingType,
+            //    Price = new Price()
+            //    {
+            //        Cost = 2.50m,
+            //        Currency = rubCurrency
+            //    }
+            //});
 
             //decimal cost = 10.24m;
             //double area = 999949;
@@ -148,8 +160,6 @@ namespace Vera.Controllers
             //    }
             //});
             //db.SaveChanges();
-
-            // TO DO HERE
 
             //db.Dispose();
         }
