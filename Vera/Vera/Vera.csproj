@@ -144,6 +144,8 @@
     <Compile Include="Domain\Entity\GluePrice.cs" />
     <Compile Include="Domain\DatabaseContext.cs" />
     <Compile Include="Domain\Entity\Job.cs" />
+    <Compile Include="Domain\Entity\Material.cs" />
+    <Compile Include="Domain\Entity\MaterialType.cs" />
     <Compile Include="Domain\Entity\Price.cs" />
     <Compile Include="Domain\Entity\Sewing.cs" />
     <Compile Include="Global.asax.cs">
@@ -168,6 +170,14 @@
     <Compile Include="Migrations\201703131754346_0.5_Something_else.cs" />
     <Compile Include="Migrations\201703131754346_0.5_Something_else.Designer.cs">
       <DependentUpon>201703131754346_0.5_Something_else.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703141229487_0.6_Add_Material_and_MaterialType_entities.cs" />
+    <Compile Include="Migrations\201703141229487_0.6_Add_Material_and_MaterialType_entities.Designer.cs">
+      <DependentUpon>201703141229487_0.6_Add_Material_and_MaterialType_entities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703141753166_0.7_Change_Format_Area_to_decimal.cs" />
+    <Compile Include="Migrations\201703141753166_0.7_Change_Format_Area_to_decimal.Designer.cs">
+      <DependentUpon>201703141753166_0.7_Change_Format_Area_to_decimal.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -237,6 +247,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703131754346_0.5_Something_else.resx">
       <DependentUpon>201703131754346_0.5_Something_else.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703141229487_0.6_Add_Material_and_MaterialType_entities.resx">
+      <DependentUpon>201703141229487_0.6_Add_Material_and_MaterialType_entities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703141753166_0.7_Change_Format_Area_to_decimal.resx">
+      <DependentUpon>201703141753166_0.7_Change_Format_Area_to_decimal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

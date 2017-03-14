@@ -18,5 +18,7 @@ namespace Vera.Domain
         public DbSet<FormingType> FormingTypes { get; set; }
         public DbSet<Sewing> Sewings { get; set; }
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<Material> Materials { get; set; }
+        public DbSet<MaterialType> MaterialTypes { get; set; }
     }
 }

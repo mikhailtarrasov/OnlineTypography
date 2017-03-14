@@ -25,7 +25,6 @@
                 <h3>Формат</h3>
                 <div style="height: 1px; width: 458px; background: black;"></div>
                 @Html.DropDownList("Format", "--Выберите формат--")<Br/>
-                <p id="price"></p><br/>
 
                 <h3>Блок</h3>
                 <div style="height: 1px; width: 458px; background: black;"></div>
@@ -34,19 +33,12 @@
 
                 <h3>Обложка</h3>
                 <div style="height: 1px; width: 458px; background: black;"></div>
-                <p>Основа обложки</p>
-                <select style="width: 200px;" name="hero[]">
-                    <option value>Выберите материал</option>
-                    <option value="без">Картон без поролона</option>
-                    <option value="на">Картон на поролоне</option>\
-                </select><br/>
+                <h4>Основа обложки</h4>
+                @Html.DropDownList("Cardboard", "--Выберите материал--")
 
-                <p>Внешний материал</p>
-                <select style="width: 200px;" name="hero1[]">
-                    <option value>Выберите материал</option>
-                    <option value="Кожа">Кожа</option>
-                    <option value="винил">Бум. винил</option>\
-                </select><br/>
+                <h4>Внешний материал</h4>
+                @Html.DropDownList("BindingMaterials", "--Выберите материал--")
+
                 <!--<div class="checkbox">
                     <label>
                         <input type="checkbox" id="logoCheckbox" value="Нанесение логотипа">
@@ -99,6 +91,14 @@
                     <li class="list-group-item">
                         <span class="badge" id="decorativeStitchingPrice"></span>
                         Декоративная строчка
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" id="cardboardPrice"></span>
+                        Основной материал обложки
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge" id="bindingMaterialPrice"></span>
+                        Внешний материал обложки
                     </li>
                 </ul>
             </div>

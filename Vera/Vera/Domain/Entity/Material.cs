@@ -5,10 +5,11 @@ using System.Web;
 
 namespace Vera.Domain.Entity
 {
-    public class Format
+    public class Material
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal Area { get; set; }
+        public virtual Price Price { get; set; }
+        public virtual MaterialType Type { get; set; }
     }
 }

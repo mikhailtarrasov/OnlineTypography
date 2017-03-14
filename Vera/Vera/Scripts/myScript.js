@@ -1,4 +1,21 @@
-﻿function countPageInit() {
+﻿function setGluePrice() {
+    var id = $('#Format').val();
+    console.log(id);    // -
+    if (id == "") {
+        $('#gluePrice').text("Выберите формат");
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: "/Home/SetGluePrice/" + id,
+            success: function (data) {
+                console.log(data);
+                $('#gluePrice').text(data);// заменяем содержимое присланным частичным представлением
+            }
+        });
+    }
+}
+
+function countPageInit() {
     $('#countOfPage').on('keyup input', function () {
         setPageCountPrice();
     });
@@ -74,9 +91,56 @@ function setTrimmingBlockPrice() {
         success: function (data) {
             console.log(data);
             $('#trimmingBlockPrice').text(data);
-            console.log($('#price').val());
         }
     });
+}
+
+function setCardboardPrice() {
+    var id = $('#Cardboard').val();
+    var formatValue = $('#Format').val();
+
+    if (id != "" && formatValue != "") {
+        var id = parseInt(id, 10);
+        var formatValue = parseInt(formatValue, 10);
+
+        id = id * 100 + formatValue;
+        console.log(id);    // -
+        $.ajax({
+            type: 'POST',
+            url: "/Home/SetMaterialPrice/" + id,
+            success: function (data) {
+                console.log(data);
+                $('#cardboardPrice').text(data);
+                console.log($('#cardboardPrice').val());
+            }
+        });
+    } else {
+        $('#cardboardPrice').text("Введены не все данные");
+    }
+}
+
+function setBindingMaterialPrice() {
+    var id = $('#BindingMaterials').val();
+    var formatValue = $('#Format').val();
+
+    if (id != "" && formatValue != "") {
+        var id = parseInt(id, 10);
+        var formatValue = parseInt(formatValue, 10);
+
+        id = id * 100 + formatValue;
+        console.log(id); // -
+        $.ajax({
+            type: 'POST',
+            url: "/Home/SetMaterialPrice/" + id,
+            success: function(data) {
+                console.log(data);
+                $('#bindingMaterialPrice').text(data);
+                console.log($('#bindingMaterialPrice').val());
+            }
+        });
+    } else {
+        $('#bindingMaterialPrice').text("Введены не все данные");
+    }
 }
 
 //function viewMoreForLogo() {
@@ -108,17 +172,10 @@ $(function() {
 
     $('#Format').change(function () {
         // получаем выбранный id - его значение
-        var id = $(this).val();
-        console.log(id);    // -
-        $.ajax({
-            type: 'POST',
-            url: "/Home/SetGluePrice/" + id,
-            success: function (data) {
-                console.log(data);
-                $('#gluePrice').text(data);// заменяем содержимое присланным частичным представлением
-                console.log($('#price').val());
-            }
-        });
+        setCardboardPrice();
+        setBindingMaterialPrice();
+
+        setGluePrice();
     });
 
     $('#FormingType').change(function () {
@@ -141,6 +198,14 @@ $(function() {
                 });
             }
         });
+    });
+
+    $('#Cardboard').change(function () {
+        setCardboardPrice();
+    });
+
+    $('#BindingMaterials').change(function () {
+        setBindingMaterialPrice();
     });
 
     $('#decorativeStitchingCheckbox').change(function () {
