@@ -1,6 +1,5 @@
 namespace Vera.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class _01_First_User_Story : DbMigration

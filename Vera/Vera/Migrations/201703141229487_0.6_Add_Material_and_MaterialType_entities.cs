@@ -1,6 +1,5 @@
 namespace Vera.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class _06_Add_Material_and_MaterialType_entities : DbMigration

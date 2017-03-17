@@ -1,6 +1,5 @@
 namespace Vera.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class _07_Change_Format_Area_to_decimal : DbMigration

@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using Vera.Domain;
 using Vera.Domain.Entity;
 
