@@ -9,7 +9,7 @@
             url: "/Home/SetGluePrice/" + id,
             success: function (data) {
                 console.log(data);
-                $('#gluePrice').text(data);// заменяем содержимое присланным частичным представлением
+                $('#gluePrice').text(new Decimal(data));// заменяем содержимое присланным частичным представлением
             }
         });
     }
@@ -29,7 +29,7 @@ function setPageCountPrice() {
         url: "/Home/SetPageCountPrice/" + countOfPage,
         success: function (data) {
             console.log("data: ", data);
-            $('#countOfPagePrice').text(data);
+            $('#countOfPagePrice').text(new Decimal(data));
         }
     });
 }
@@ -51,7 +51,7 @@ function setBlockFormingPrice() {
         url: "/Home/SetSewingPrice/" + tetrCountStr + formingType,
         success: function (data) {
             console.log("data: ", data);
-            $('#blockPrice').text(data);
+            $('#blockPrice').text(new Decimal(data));
         }
     });
 };
@@ -68,14 +68,14 @@ function setFillisterPrice() {
                 url: "/Home/SetFillisterPrice/" + tetrCount,
                 success: function (data) {
                     console.log(data);
-                    $('#fillisterPrice').text(data);
+                    $('#fillisterPrice').text(new Decimal(data));
                 }
             });
         } else {
-            $('#fillisterPrice').text(0);
+            $('#fillisterPrice').text(new Decimal(0));
         }
     } else {
-        $('#fillisterPrice').text(0);
+        $('#fillisterPrice').text(new Decimal(0));
     }
 }
 
@@ -90,7 +90,7 @@ function setTrimmingBlockPrice() {
         url: "/Home/SetTrimmingBlockPrice/",
         success: function (data) {
             console.log(data);
-            $('#trimmingBlockPrice').text(data);
+            $('#trimmingBlockPrice').text(new Decimal(data));
         }
     });
 }
@@ -110,7 +110,7 @@ function setCardboardPrice() {
             url: "/Home/SetMaterialPrice/" + id,
             success: function (data) {
                 console.log(data);
-                $('#cardboardPrice').text(data);
+                $('#cardboardPrice').text(new Decimal(data));
                 console.log($('#cardboardPrice').val());
             }
         });
@@ -134,13 +134,42 @@ function setBindingMaterialPrice() {
             url: "/Home/SetMaterialPrice/" + id,
             success: function(data) {
                 console.log(data);
-                $('#bindingMaterialPrice').text(data);
+                $('#bindingMaterialPrice').text(new Decimal(data));
                 console.log($('#bindingMaterialPrice').val());
             }
         });
     } else {
         $('#bindingMaterialPrice').text("Введены не все данные");
     }
+}
+
+function calculatePrice() {
+    
+    var decorativeStitchingPrice = $('#decorativeStitchingPrice').text();       /* true/false */
+
+    try {
+        var gluePrice            = new Decimal($('#gluePrice').text());
+        var countOfPagePrice     = new Decimal($('#countOfPagePrice').text());
+        var fillisterPrice       = new Decimal($('#fillisterPrice').text());
+        var blockPrice           = new Decimal($('#blockPrice').text());
+        var trimmingBlockPrice   = new Decimal($('#trimmingBlockPrice').text());
+        var cardboardPrice       = new Decimal($('#cardboardPrice').text());
+        var bindingMaterialPrice = new Decimal($('#bindingMaterialPrice').text());
+
+        var result = gluePrice.plus(countOfPagePrice)
+            .plus(fillisterPrice)
+            .plus(blockPrice)
+            .plus(trimmingBlockPrice)
+            .plus(cardboardPrice)
+            .plus(bindingMaterialPrice);
+
+        $('#totalPrice').text(result);
+    } catch (e) {
+        alert('Введены не все данные! Проверьте формы ввода!');
+    } 
+    
+
+
 }
 
 //function viewMoreForLogo() {
@@ -166,6 +195,10 @@ function setBindingMaterialPrice() {
 $(function() {
     //countPageInit();
     //blockFormingInit();
+    $('.partOfThePrice').each(function() {      // Обнуляем все частичные стоимости
+        $(this).text(new Decimal(0));
+    });
+
     setFillisterPrice();                        // Фальцовка
     setDecorativeStitchingPrice();              // Декоративная строчка true/false
     setTrimmingBlockPrice();                    // Подрезка блока
@@ -211,6 +244,10 @@ $(function() {
     $('#decorativeStitchingCheckbox').change(function () {
         console.log($('#decorativeStitchingCheckbox').is(':checked'));
         setDecorativeStitchingPrice();
+    });
+
+    $('#calculateButton').click(function () {
+        calculatePrice();
     });
 
     //$('#logoCheckbox').change(function() {

@@ -1,107 +1,111 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "../Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
+    <script src="~/Scripts/myScript.js"></script>
 </head>
 <body>
-<div class="container main">
-    <div class="row">
-        <div class="col-xs-3">
-            <div class="container-fluid">
-                <h2>Изделия</h2>
-            </div>
+
+<div class="row">
+    <div class="col-xs-3">
+        <div class="container-fluid">
+            <h2>Изделия</h2>
         </div>
-        <div class="col-xs-6" style="border: 1px solid gainsboro;">
-            <div style="margin: 0 auto; text-align: center;">
-                <h2>Расчет изделия</h2>
+    </div>
+    <div class="col-xs-6" style="border: 1px solid gainsboro;">
+        <div style="margin: 0 auto; text-align: center;">
+            <h2>Расчет изделия</h2>
 
-                <h3>Формат</h3>
-                <div style="height: 1px; width: 458px; background: black;"></div>
-                @Html.DropDownList("Format", "--Выберите формат--")<Br/>
+            <h3>Формат</h3>
+            <div style="height: 1px; width: 458px; background: black;"></div>
+            @Html.DropDownList("Format", "--Выберите формат--")<Br/>
 
-                <h3>Блок</h3>
-                <div style="height: 1px; width: 458px; background: black;"></div>
-                @Html.DropDownList("FormingType", "--Выберите тип формировки блока--")
-                <div id="formingTypeBlock"></div><br/>
+            <h3>Блок</h3>
+            <div style="height: 1px; width: 458px; background: black;"></div>
+            @Html.DropDownList("FormingType", "--Выберите тип формировки блока--")
+            <div id="formingTypeBlock"></div><br/>
 
-                <h3>Обложка</h3>
-                <div style="height: 1px; width: 458px; background: black;"></div>
-                <h4>Основа обложки</h4>
-                @Html.DropDownList("Cardboard", "--Выберите материал--")
+            <h3>Обложка</h3>
+            <div style="height: 1px; width: 458px; background: black;"></div>
+            <h4>Основа обложки</h4>
+            @Html.DropDownList("Cardboard", "--Выберите материал--")
 
-                <h4>Внешний материал</h4>
-                @Html.DropDownList("BindingMaterials", "--Выберите материал--")
+            <h4>Внешний материал</h4>
+            @Html.DropDownList("BindingMaterials", "--Выберите материал--")
 
-                <!--<div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="logoCheckbox" value="Нанесение логотипа">
-                        Нанесение логотипа
-                    </label>
-                </div>-->
-                <h4>Логотип</h4>
-                <select style="width: 200px;" name="hero2[]">
-                    <option value>Выберите тип нанесения</option>
-                    <option value="Тиснение">Тиснение</option>
-                    <option value="УФ-печать">УФ-печать</option>\
-                </select><br/>
-                <br/>
-                
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="decorativeStitchingCheckbox" value="Декоративная строчка">
-                        Декоративная строчка
-                    </label>
-                </div>
-                <br/>
-                <p>Итого: </p>
-                <span id="totalPrice"></span>
+            <!--<div class="checkbox">
+                <label>
+                    <input type="checkbox" id="logoCheckbox" value="Нанесение логотипа">
+                    Нанесение логотипа
+                </label>
+            </div>-->
+            <h4>Логотип</h4>
+            <select style="width: 200px;" name="hero2[]">
+                <option value>Выберите тип нанесения</option>
+                <option value="Тиснение">Тиснение</option>
+                <option value="УФ-печать">УФ-печать</option>\
+            </select><br/>
+            <br/>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="decorativeStitchingCheckbox" value="Декоративная строчка">
+                    Декоративная строчка
+                </label>
             </div>
+            <br/>
+            <h4>
+                Итого:
+                <b id="totalPrice"></b>
+                <span class="glyphicon-rub" aria-hidden="true"></span>
+            </h4>
+            <button class="btn btn-primary" id="calculateButton">Рассчитать</button>
         </div>
-        <div class="col-xs-3">
-            <div class="container-fluid">
-                <h2>Цены</h2>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <span class="badge" id="gluePrice"></span>
-                        Цена клея за формат
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" id="countOfPagePrice"></span>
-                        Подбор блока
-                    </li>
-                    <li class="list-group-item" id="fillisterLi">
-                        <span class="badge" id="fillisterPrice"></span>
-                        Фальцовка
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" id="blockPrice"></span>
-                        Формировка блока
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" id="trimmingBlockPrice"></span>
-                        Подрезка блока
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" id="decorativeStitchingPrice"></span>
-                        Декоративная строчка
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" id="cardboardPrice"></span>
-                        Основной материал обложки
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge" id="bindingMaterialPrice"></span>
-                        Внешний материал обложки
-                    </li>
-                </ul>
-            </div>
+    </div>
+    <div class="col-xs-3">
+        <div class="container-fluid">
+            <h2>Цены</h2>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge partOfThePrice" id="gluePrice"></span>
+                    Цена клея за формат
+                </li>
+                <li class="list-group-item">
+                    <span class="badge partOfThePrice" id="countOfPagePrice"></span>
+                    Подбор блока
+                </li>
+                <li class="list-group-item" id="fillisterLi">
+                    <span class="badge partOfThePrice" id="fillisterPrice"></span>
+                    Фальцовка
+                </li>
+                <li class="list-group-item">
+                    <span class="badge partOfThePrice" id="blockPrice"></span>
+                    Формировка блока
+                </li>
+                <li class="list-group-item">
+                    <span class="badge partOfThePrice" id="trimmingBlockPrice"></span>
+                    Подрезка блока
+                </li>
+                <li class="list-group-item">
+                    <span class="badge partOfThePrice" id="decorativeStitchingPrice"></span>
+                    Декоративная строчка
+                </li>
+                <li class="list-group-item">
+                    <span class="badge partOfThePrice" id="cardboardPrice"></span>
+                    Основной материал обложки
+                </li>
+                <li class="list-group-item">
+                    <span class="badge partOfThePrice" id="bindingMaterialPrice"></span>
+                    Внешний материал обложки
+                </li>
+            </ul>
         </div>
     </div>
 </div>
+
 </body>
 </html>

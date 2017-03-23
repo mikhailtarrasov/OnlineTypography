@@ -8,6 +8,9 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/Content/bootstrap.css"/>
     <link rel="stylesheet" href="~/Content/Style.css"/>
+    <script type="text/javascript" src="~/Scripts/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/decimal.min.js"></script>
 </head>
 
 <body>
@@ -21,12 +24,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" style="margin-left: 0;">Vera</a>
+                <a class="navbar-brand" href="/Home/Index" style="margin-left: 0;">Vera</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right" style="margin-right: 0;">
                     <li><a href="/Home/Index">Калькулятор</a></li>
-                    <li><a href="/Home/Inventory">Инвентаризация</a></li>
+                    <li><a href="/Inventory/Index">Инвентаризация</a></li>
                     <li><a href="/Home/Login">Войти</a></li>
                     <!--<li><button type="button" class="btn btn-default navbar-btn">Войти</button></li>-->
 
@@ -35,10 +38,10 @@
         </div>
     </nav>
 </div>
-@RenderBody()
-<script src="~/Scripts/jquery.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/myScript.js"></script>
+
+<div class="container main">
+    @RenderBody()
+</div>
 
 </body>
 </html>
