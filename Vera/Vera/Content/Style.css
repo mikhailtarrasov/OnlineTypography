@@ -10,3 +10,11 @@
     height: 135px;
 }
 
+.myInputGroup {
+    position: relative;
+    width: 100%;
+}
+
+.myInputGroupSpan {
+    width: 50%;
+}

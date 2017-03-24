@@ -213,7 +213,9 @@ $(function() {
 
     $('#FormingType').change(function () {
         var id = $(this).val();
-
+        if (id == "") {
+            $('#formingTypeBlock').replaceWith(id); // заменяем содержимое присланным частичным представлением
+        }
         $.ajax({
             type: 'POST',
             url: "/Home/FormingType/" + id,
