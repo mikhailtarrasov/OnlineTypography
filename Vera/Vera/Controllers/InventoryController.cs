@@ -128,6 +128,76 @@ namespace Vera.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Inventory/Expense/5
+        public ActionResult Expense(int? id)                            // Расход
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Material material = db.Materials.Find(id);
+            if (material == null)
+            {
+                return HttpNotFound();
+            }
+            return View(material);
+        }
+
+        // POST: Inventory/Expense/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Expense(Material material, double dBalance) // Расход
+        {
+            if (ModelState.IsValid)
+            {
+                material.Balance -= dBalance;
+                if (material.Balance < 0)
+                {
+                    material.Balance = 0;
+                }
+
+                db.Entry(material).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(material);
+        }
+
+        // GET: Inventory/Income/5
+        public ActionResult Income(int? id)                             // Приход
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Material material = db.Materials.Find(id);
+            if (material == null)
+            {
+                return HttpNotFound();
+            }
+            return View(material);
+        }
+
+        // POST: Inventory/Income/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Income([Bind(Include = "Id, Name, Balance, Price, Type")] Material material, double dBalance)   // Приход
+        {
+            if (ModelState.IsValid)
+            {
+                material.Balance += dBalance;
+
+                db.Entry(material).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(material);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
