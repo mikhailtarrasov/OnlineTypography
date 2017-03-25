@@ -3,30 +3,27 @@
 <div id="formingTypeBlock">
     <h4>@Model.Name тип формировки блока</h4>
     <form name="block" method="POST">
-        <div class="input-group">
-            <span   class="input-group-addon" id="basic-addon1">Количество листов</span>
-            <input  type="text" class="form-control" id="countOfPage" aria-describedby="basic-addon1"
-                    autocomplete="off"
-                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+        <div class="input-group myInputGroup">
+            <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Количество листов</span>
+            <input type="text" class="form-control" id="countOfPage" aria-describedby="basic-addon1"
+                   autocomplete="off"
+                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
         </div>
         <br/>
-        <div @if (Model.Name == "Постраничный")
-             {
-                @:class="input-group hidden"
-             }
-             else
-             {
-                @:class="input-group"
-             }>
-            <span   class="input-group-addon" id="basic-addon2">Количество тетрадей</span>
-            <input  type="text" class="form-control" id="tetr" value="1" aria-describedby="basic-addon2"
-                    autocomplete="off"
-                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-                    @if (Model.Name == "Постраничный")
-                    {   
-                        @:readonly="readonly"
-                    } />
+        <div @if (Model.Name == "Постраничный") { 
+                 @: class="input-group hidden myInputGroup"
+            } else { 
+                 @: class="input-group myInputGroup myInputGroup"
+            }>
+            <span class="input-group-addon myInputGroupSpan" id="basic-addon2">Количество тетрадей</span>
+            <input type="text" class="form-control" id="tetr" value="1" aria-describedby="basic-addon2"
+                   autocomplete="off"
+                   onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                   @if (Model.Name == "Постраничный") {    @: readonly="readonly"
+                                                          } />
         </div>
+
+
         
         @if (Model.Name == "Потетрадный")
         {

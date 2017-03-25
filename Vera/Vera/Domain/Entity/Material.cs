@@ -6,5 +6,6 @@
         public string Name { get; set; }
         public virtual Price Price { get; set; }
         public virtual MaterialType Type { get; set; }
+        public double Balance { get; set; }
     }
 }
