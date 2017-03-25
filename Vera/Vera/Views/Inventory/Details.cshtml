@@ -1,0 +1,48 @@
+﻿@model Vera.Domain.Entity.Material
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container-fluid">
+    <h2>Детали</h2>
+
+    <div>
+        <hr />
+        <h4>Материал</h4>
+        <dl class="dl-horizontal">
+            <dt>
+                Наименование
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                Стоимость за ед.
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price.Cost)
+            </dd>
+
+            <dt>
+                Валюта
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price.Currency.Name)
+            </dd>
+
+            <dt>
+                Остаток
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Balance)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Вернуться к списку", "Index")
+    </p>    
+</div>
