@@ -214,25 +214,31 @@ $(function() {
     $('#FormingType').change(function () {
         var id = $(this).val();
         if (id == "") {
-            $('#formingTypeBlock').replaceWith(id); // заменяем содержимое присланным частичным представлением
-        }
-        $.ajax({
-            type: 'POST',
-            url: "/Home/FormingType/" + id,
-            success: function (data) {
-                $('#formingTypeBlock').replaceWith(data), // заменяем содержимое присланным частичным представлением
+            $('#formingTypeBlock').text(id); // Убираем блок, если не выбран тип формировки
 
-                setPageCountPrice();
-                setBlockFormingPrice();
-                setFillisterPrice();
+            $('#countOfPagePrice').text(new Decimal(0));    // 
+            $('#blockPrice').text(new Decimal(0));          // Обнуляем все данные, которые могли остаться с расчёта с выбранным блоком
+            $('#fillisterPrice').text(new Decimal(0));      // Убираем Фальцовку из списка цен
+            $('#fillisterLi').css("display", "none");       // 
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: "/Home/FormingType/" + id,
+                success: function (data) {
+                    $('#formingTypeBlock').replaceWith(data),   // заменяем содержимое присланным частичным представлением
 
-                countPageInit();
-                blockFormingInit();
-                $('#fillister').change(function () {
+                    setPageCountPrice();
+                    setBlockFormingPrice();
                     setFillisterPrice();
-                });
-            }
-        });
+
+                    countPageInit();
+                    blockFormingInit();
+                    $('#fillister').change(function () {
+                        setFillisterPrice();
+                    });
+                }
+            });
+        }
     });
 
     $('#Cardboard').change(function () {

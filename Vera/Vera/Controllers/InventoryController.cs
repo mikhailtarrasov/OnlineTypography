@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -84,15 +85,15 @@ namespace Vera.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,Type,Balance")] Material material, int currencyId)
+        public ActionResult Edit([Bind(Include = "Id,Name,Price,Type,Balance")] Material material)
         {
             if (ModelState.IsValid)
             {
-                var price = db.Prices.Find(material.Price.Id);
-                price.Cost = material.Price.Cost;
-                price.Currency = db.Currencies.Find(currencyId);
+                //var price = db.Prices.Find(material.Price.Id);
+                //price.Cost = material.Price.Cost;
 
-                material.Price = price;
+                //material.Price = price;
+                db.Entry(material.Price).State = EntityState.Modified;
                 db.Entry(material).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -185,11 +186,16 @@ namespace Vera.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Income([Bind(Include = "Id, Name, Balance, Price, Type")] Material material, double dBalance)   // Приход
+        public ActionResult Income([Bind(Include = "Id, Name, Balance, Price, Type")] Material material, double? dBalance, decimal? newCost)   // Приход
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && dBalance != null)
             {
-                material.Balance += dBalance;
+                material.Balance += Convert.ToDouble(dBalance);
+                if (newCost != null)
+                {
+                    material.Price.Cost = Convert.ToDecimal(newCost) / Convert.ToDecimal(dBalance);
+                    db.Entry(material.Price).State = EntityState.Modified;
+                }
 
                 db.Entry(material).State = EntityState.Modified;
                 db.SaveChanges();
