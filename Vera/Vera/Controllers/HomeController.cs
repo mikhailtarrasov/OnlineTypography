@@ -48,11 +48,6 @@ namespace Vera.Controllers
             return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
         }
 
-        //public ActionResult Logotype(int id)
-        //{
-        //    return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
-        //}
-
         public decimal SetSewingPrice(string id)
         {
             int response = Int32.Parse(id);
@@ -62,7 +57,6 @@ namespace Vera.Controllers
 
             var sewing = db.Sewings.FirstOrDefault(x => x.FormingType.Id == idForming);
             if (sewing != null) return sewing.Price.Cost*sewing.Price.Currency.Rate*tetrCountInt;
-            //else MessageBox.Show("Не было найдено цены за шитьё, для такого идентификатора формата");
             
             return 0m;
         }

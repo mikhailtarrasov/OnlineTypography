@@ -89,10 +89,6 @@ namespace Vera.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var price = db.Prices.Find(material.Price.Id);
-                //price.Cost = material.Price.Cost;
-
-                //material.Price = price;
                 db.Entry(material.Price).State = EntityState.Modified;
                 db.Entry(material).State = EntityState.Modified;
                 db.SaveChanges();
