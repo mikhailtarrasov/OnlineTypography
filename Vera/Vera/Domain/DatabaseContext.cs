@@ -15,5 +15,7 @@ namespace Vera.Domain
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<MaterialType> MaterialTypes { get; set; }
+        public DbSet<Colorfulness> Colorfulnesses { get; set; }
+        public DbSet<ColorfulnessPricePerFormat> ColorfulnessPricePerFormats { get; set; }
     }
 }

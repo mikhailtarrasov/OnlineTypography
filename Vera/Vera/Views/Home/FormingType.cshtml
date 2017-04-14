@@ -1,8 +1,8 @@
 ﻿
 
 <div id="formingTypeBlock">
-    <h4>@Model.Name тип формировки блока</h4>
     <form name="block" method="POST">
+        <h4>@Model.Name тип формировки блока</h4>
         <div class="input-group myInputGroup">
             <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Количество листов</span>
             <input type="text" class="form-control" id="countOfPage" aria-describedby="basic-addon1"
@@ -34,5 +34,11 @@
                 </label>
             </div>
         }
+        
+        <h4>Печать блока</h4>
+        <div class="input-group myInputGroup">
+            <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Цветность печати</span>
+            @Html.DropDownList("Colorfulness", ViewBag.Colorfulness as SelectList, "Выберите цветность печати", new { @class = "form-control" })<br />
+        </div>
     </form>
 </div>

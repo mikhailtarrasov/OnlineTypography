@@ -45,6 +45,7 @@ namespace Vera.Controllers
 
         public ActionResult FormingType(int id)
         {
+            ViewBag.Colorfulness = new SelectList(db.Colorfulnesses, "Id", "Name");
             return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
         }
 
@@ -209,6 +210,72 @@ namespace Vera.Controllers
             //foreach (var material in materials)
             //{
             //    material.Balance = 0;
+            //}
+            //db.Colorfulnesses.Add(new Colorfulness() { Name = "1+0" });
+            //db.Colorfulnesses.Add(new Colorfulness() { Name = "1+1" });
+            //db.Colorfulnesses.Add(new Colorfulness() { Name = "4+0" });
+            //db.Colorfulnesses.Add(new Colorfulness() { Name = "4+1" });
+            //db.Colorfulnesses.Add(new Colorfulness() { Name = "4+4" });
+            //db.SaveChanges();
+            //var cost = 115;
+
+            //var rubCurr = db.Currencies.FirstOrDefault(x => x.Name == "RUB");
+
+            //for (int i = 0; i <= 10; i++)
+            //{
+            //    var currentFormat = db.Formats.FirstOrDefault(x => x.Name == "A" + i);
+
+            //    db.ColorfulnessPricePerFormats.Add(new ColorfulnessPricePerFormat()
+            //    {
+            //        Colorfulness = db.Colorfulnesses.First(x => x.Name == "1+0"),
+            //        Format = currentFormat,
+            //        Price = new Price()
+            //        {
+            //            Cost = cost,
+            //            Currency = rubCurr
+            //        }
+            //    });
+            //    db.ColorfulnessPricePerFormats.Add(new ColorfulnessPricePerFormat()
+            //    {
+            //        Colorfulness = db.Colorfulnesses.First(x => x.Name == "1+1"),
+            //        Format = currentFormat,
+            //        Price = new Price()
+            //        {
+            //            Cost = cost * 2,
+            //            Currency = rubCurr
+            //        }
+            //    });
+            //    db.ColorfulnessPricePerFormats.Add(new ColorfulnessPricePerFormat()
+            //    {
+            //        Colorfulness = db.Colorfulnesses.First(x => x.Name == "4+0"),
+            //        Format = currentFormat,
+            //        Price = new Price()
+            //        {
+            //            Cost = cost * 4,
+            //            Currency = rubCurr
+            //        }
+            //    });
+            //    db.ColorfulnessPricePerFormats.Add(new ColorfulnessPricePerFormat()
+            //    {
+            //        Colorfulness = db.Colorfulnesses.First(x => x.Name == "4+1"),
+            //        Format = currentFormat,
+            //        Price = new Price()
+            //        {
+            //            Cost = cost * 5,
+            //            Currency = rubCurr
+            //        }
+            //    });
+            //    db.ColorfulnessPricePerFormats.Add(new ColorfulnessPricePerFormat()
+            //    {
+            //        Colorfulness = db.Colorfulnesses.First(x => x.Name == "4+4"),
+            //        Format = currentFormat,
+            //        Price = new Price()
+            //        {
+            //            Cost = cost * 8,
+            //            Currency = rubCurr
+            //        }
+            //    });
+            //    cost /= 2;
             //}
             //db.SaveChanges();
 

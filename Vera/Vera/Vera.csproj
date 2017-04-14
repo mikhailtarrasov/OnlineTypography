@@ -138,6 +138,8 @@
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Domain\Entity\Colorfulness.cs" />
+    <Compile Include="Domain\Entity\ColorfulnessPricePerFormat.cs" />
     <Compile Include="Domain\Entity\Currency.cs" />
     <Compile Include="Domain\Entity\Format.cs" />
     <Compile Include="Domain\Entity\FormingType.cs" />
@@ -182,6 +184,10 @@
     <Compile Include="Migrations\201703210825512_0.8_Add_Balance_to_Materials.cs" />
     <Compile Include="Migrations\201703210825512_0.8_Add_Balance_to_Materials.Designer.cs">
       <DependentUpon>201703210825512_0.8_Add_Balance_to_Materials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704141538279_0.9_Add_Colorfulness_and_ColorfulnessPricePerFormat_entities.cs" />
+    <Compile Include="Migrations\201704141538279_0.9_Add_Colorfulness_and_ColorfulnessPricePerFormat_entities.Designer.cs">
+      <DependentUpon>201704141538279_0.9_Add_Colorfulness_and_ColorfulnessPricePerFormat_entities.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -273,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703210825512_0.8_Add_Balance_to_Materials.resx">
       <DependentUpon>201703210825512_0.8_Add_Balance_to_Materials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704141538279_0.9_Add_Colorfulness_and_ColorfulnessPricePerFormat_entities.resx">
+      <DependentUpon>201704141538279_0.9_Add_Colorfulness_and_ColorfulnessPricePerFormat_entities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
