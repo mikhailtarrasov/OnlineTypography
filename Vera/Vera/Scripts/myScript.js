@@ -18,6 +18,7 @@
 function countPageInit() {
     $('#countOfPage').on('keyup input', function () {
         setPageCountPrice();
+        setPrintingBlockPrice();
     });
 };
 
@@ -143,25 +144,55 @@ function setBindingMaterialPrice() {
     }
 }
 
+function setPrintingBlockPrice() {
+    var idFormat = $('#Format').val();
+    if (idFormat == "") {
+        $('#printBlockPrice').text(new Decimal(0));
+        $('#printingAlert').css("display", "none");
+    } else {
+        if (idFormat == 1 || idFormat == 2) {
+            $('#printBlockPrice').text(new Decimal(0));
+            $('#printingAlert').css("display", "block");
+            $('#printingAlert').text("Для данного формата печать не производится");
+        } else {
+            $('#printingAlert').css("display", "none");
+            var idColorfulness = $('#Colorfulness').val();
+            var idFormingType = $('#FormingType').val();
+            var countOfPage = $('#countOfPage').val();
+            var paperId = $('#Paper').val();
+            $.ajax({
+                type: 'POST',
+                url: "/Home/SetPrintingBlockPrice?idColorfulness=" + idColorfulness + "&idFormat=" + idFormat
+                + "&idFormingType=" + idFormingType + "&countOfPage=" + countOfPage + "&paperId=" + paperId,
+                success: function (data) {
+                    $('#printBlockPrice').text(new Decimal(data));
+                }
+            });
+        }
+    }
+}
+
 function calculatePrice() {
     
     var decorativeStitchingPrice = $('#decorativeStitchingPrice').text();       /* true/false */
 
     try {
-        var gluePrice            = new Decimal($('#gluePrice').text());
-        var countOfPagePrice     = new Decimal($('#countOfPagePrice').text());
-        var fillisterPrice       = new Decimal($('#fillisterPrice').text());
-        var blockPrice           = new Decimal($('#blockPrice').text());
-        var trimmingBlockPrice   = new Decimal($('#trimmingBlockPrice').text());
-        var cardboardPrice       = new Decimal($('#cardboardPrice').text());
-        var bindingMaterialPrice = new Decimal($('#bindingMaterialPrice').text());
+        var gluePrice               = new Decimal($('#gluePrice').text());
+        var countOfPagePrice        = new Decimal($('#countOfPagePrice').text());
+        var fillisterPrice          = new Decimal($('#fillisterPrice').text());
+        var blockPrice              = new Decimal($('#blockPrice').text());
+        var trimmingBlockPrice      = new Decimal($('#trimmingBlockPrice').text());
+        var cardboardPrice          = new Decimal($('#cardboardPrice').text());
+        var bindingMaterialPrice    = new Decimal($('#bindingMaterialPrice').text());
+        var printBlockPrice         = new Decimal($('#printBlockPrice').text());
 
         var result = gluePrice.plus(countOfPagePrice)
             .plus(fillisterPrice)
             .plus(blockPrice)
             .plus(trimmingBlockPrice)
             .plus(cardboardPrice)
-            .plus(bindingMaterialPrice);
+            .plus(bindingMaterialPrice)
+            .plus(printBlockPrice);
 
         $('#totalPrice').text(result);
     } catch (e) {
@@ -207,12 +238,16 @@ $(function() {
         // получаем выбранный id - его значение
         setCardboardPrice();
         setBindingMaterialPrice();
+        setPrintingBlockPrice();
 
         setGluePrice();
     });
 
     $('#FormingType').change(function () {
         var id = $(this).val();
+
+        $("#printBlockPrice").text(new Decimal(0));
+
         if (id == "") {
             $('#formingTypeBlock').text(id); // Убираем блок, если не выбран тип формировки
 
@@ -233,8 +268,19 @@ $(function() {
 
                     countPageInit();
                     blockFormingInit();
+
+                    setPrintingBlockPrice();
+
                     $('#fillister').change(function () {
                         setFillisterPrice();
+                    });
+
+                    $('#Colorfulness').change(function () {
+                        setPrintingBlockPrice();
+                    });
+
+                    $('#Paper').change(function() {
+                        setPrintingBlockPrice();
                     });
                 }
             });

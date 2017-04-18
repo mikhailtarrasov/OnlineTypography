@@ -12,9 +12,9 @@ namespace Vera.Controllers
         // GET: /Home/
 
         private DatabaseContext db = new DatabaseContext();
-        // Фальцовка. Только для потетрадного типа формировки блока, умножается на кол-во тетрадей
-        private decimal fillisterPrice = 0.5m;      // Фальцовка
-        private decimal trimmingBlock = 10m;        // Подрезка блока
+        
+        //private decimal fillisterPrice = 0.5m;      // Фальцовка
+        //private decimal trimmingBlock = 10m;        // Подрезка блока
                                             
 
         public ActionResult Index()
@@ -42,10 +42,11 @@ namespace Vera.Controllers
             var model = db.GluePrices.FirstOrDefault(x => x.Format.Id == id);
             return model.Price.Cost * model.Price.Currency.Rate;
         }
-
+    
         public ActionResult FormingType(int id)
         {
             ViewBag.Colorfulness = new SelectList(db.Colorfulnesses, "Id", "Name");
+            ViewBag.Paper = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Бумага"), "Id", "Name");
             return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
         }
 
@@ -73,12 +74,14 @@ namespace Vera.Controllers
 
         public decimal SetFillisterPrice(int id)
         {
-            return fillisterPrice*id;
+            var fillister = db.Jobs.FirstOrDefault(x => x.JobTitle == "Фальцовка");
+            return fillister.Pay.Cost * fillister.Pay.Currency.Rate * id;
         }
 
         public decimal SetTrimmingBlockPrice()
         {
-            return trimmingBlock;
+            var trimmingBlock = db.Jobs.FirstOrDefault(x => x.JobTitle == "Подрезка блока");
+            return trimmingBlock.Pay.Cost * trimmingBlock.Pay.Currency.Rate;
         }
 
         public decimal SetMaterialPrice(int id)
@@ -87,7 +90,26 @@ namespace Vera.Controllers
             id /= 100;
             var material = db.Materials.FirstOrDefault(x => x.Id == id);
             var format = db.Formats.Find(formatId);
-            return Decimal.Round(material.Price.Cost * material.Price.Currency.Rate * 2 * format.Area, 2);    // Стоимость за кв.м. * две площади формата
+            return Decimal.Round(material.Price.Cost * material.Price.Currency.Rate * 2 * format.Area, 2);      // Стоимость за кв.м. * две площади формата
+        }
+
+        public decimal SetPrintingBlockPrice(int? idColorfulness, int? idFormat, int? idFormingType, int? countOfPage, int? paperId)
+        {
+            if (idColorfulness.HasValue && idFormat.HasValue && idFormingType.HasValue && countOfPage.HasValue && paperId.HasValue)
+            {
+                if (db.FormingTypes.Find(idFormingType).Name == "Потетрадный")
+                {
+                    idFormat--;                                                     // При потетрадном типе формировки считаем печать как на формате 
+                    countOfPage = (int)Math.Ceiling((decimal)countOfPage / 2);      // в два раза большем, при в два раза меньшем количестве страниц
+                }
+                var colorFormat = db.ColorfulnessPricePerFormats.FirstOrDefault(x => x.Format.Id == idFormat && x.Colorfulness.Id == idColorfulness);
+                var printingPricePerSheet = colorFormat.Price.Cost * colorFormat.Price.Currency.Rate;
+                var paper = db.Materials.Find(paperId);
+                var paperPricePerSheet = paper.Price.Cost * paper.Price.Currency.Rate / 500;                    //Делим на кол-во листов в упаковке
+                
+                return countOfPage.Value * (paperPricePerSheet + printingPricePerSheet);
+            }
+            return 0;
         }
 
         public void FillInTheDatabase()
@@ -156,6 +178,7 @@ namespace Vera.Controllers
             //db.SaveChanges();
             //db.MaterialTypes.Add(new MaterialType() { TypeName = "Картон" });
             //db.MaterialTypes.Add(new MaterialType() { TypeName = "Переплетный материал" });
+            //db.MaterialTypes.Add(new MaterialType() { TypeName = "Бумага" });
 
             //db.SaveChanges();
 
@@ -217,7 +240,7 @@ namespace Vera.Controllers
             //db.Colorfulnesses.Add(new Colorfulness() { Name = "4+1" });
             //db.Colorfulnesses.Add(new Colorfulness() { Name = "4+4" });
             //db.SaveChanges();
-            //var cost = 115;
+            //decimal cost = 115;
 
             //var rubCurr = db.Currencies.FirstOrDefault(x => x.Name == "RUB");
 
@@ -277,6 +300,27 @@ namespace Vera.Controllers
             //    });
             //    cost /= 2;
             //}
+
+            // Фальцовка. Только для потетрадного типа формировки блока, умножается на кол-во тетрадей
+            //db.Jobs.Add(new Job()
+            //{
+            //    JobTitle = "Фальцовка",
+            //    Pay = new Price()
+            //    {
+            //        Cost = 0.5m,
+            //        Currency = rubCurr
+            //    }
+            //});
+            //db.Jobs.Add(new Job()
+            //{
+            //    JobTitle = "Подрезка блока",
+            //    Pay = new Price()
+            //    {
+            //        Cost = 10m,
+            //        Currency = rubCurr
+            //    }
+            //});
+
             //db.SaveChanges();
 
             //db.Dispose();
