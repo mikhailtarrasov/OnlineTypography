@@ -9,102 +9,148 @@
     <script src="~/Scripts/myScript.js"></script>
 </head>
 <body>
+<div class="container-fluid">
+    <div class=" row" style="margin-right: -30px; margin-left: 0px; margin-bottom: 30px;">
+        @*<div class="col-xs-3">
+                <div class="container-fluid">
+                    <h2>Изделия</h2>
+                </div>
+            </div>*@
+        @*<div class="col-xs-6" style="border: 1px solid gainsboro; ">*@
+        <div class="col-xs-6" style="border: 1px solid gainsboro; ">
+            <div class="row" style="margin: 0 auto; text-align: center;">
+                <h2>Расчет изделия</h2>
+                <hr />
 
-<div class="row">
-    <div class="col-xs-3">
-        <div class="container-fluid">
-            <h2>Изделия</h2>
+                <div class="input-group myInputGroup">
+                    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Формат</span>
+                    @Html.DropDownList("Format", ViewBag.Format as SelectList, "Выберите формат", new { @class = "form-control" })<br />
+                </div>
+                <hr />
+
+                <h3>Блок</h3>
+                <div class="input-group myInputGroup">
+                    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Тип формировки блока</span>
+                    @Html.DropDownList("FormingType", ViewBag.FormingType as SelectList, "Выберите тип формировки блока", new { @class = "form-control" })<br />
+                </div>
+                <div id="formingTypeBlock"></div>
+                <hr />
+
+                <h3>Обложка</h3>
+                <div class="input-group myInputGroup">
+                    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Основа обложки</span>
+                    @Html.DropDownList("Cardboard", ViewBag.Cardboard as SelectList, "Выберите материал", new { @class = "form-control" })<br />
+                </div>
+                <br />
+                <div class="input-group myInputGroup" style="border-radius: 3px; overflow: hidden;">
+                    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Внешний материал</span>
+                    @Html.DropDownList("BindingMaterials", ViewBag.BindingMaterials as SelectList, "Выберите материал", new { @class = "form-control" })<br />
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="decorativeStitchingCheckbox" value="Декоративная строчка">
+                        Декоративная строчка
+                    </label>
+                </div>
+                <hr />
+                
+                <div class="input-group myInputGroup">
+                    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Тираж изделия</span>
+                    <input type="text" class="form-control" id="editionCirculation" aria-describedby="basic-addon1"
+                           autocomplete="off"
+                           onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                           value="1">
+                </div>
+                <br/>
+                <button class="btn btn-primary btn-lg btn-block" id="calculateButton">Пересчитать стоимость тиража</button>
+                <br />
+                @*<h4>
+                    Итого:
+                    <b id="totalPrice"></b>
+                    <span class="glyphicon-rub" aria-hidden="true"></span>
+                </h4>*@
+                
+
+                
+            </div>
         </div>
-    </div>
-    <div class="col-xs-6" style="border: 1px solid gainsboro; ">
-        <div class="row" style="margin: 0 auto; text-align: center;">
-            <h2>Расчет изделия</h2>
-            <hr />
+        @*<div class="col-xs-3">*@
+        <div class="col-xs-6">
+            <div class="container-fluid">
+                <h2>Цены</h2>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge partOfThePrice" id="gluePrice"></span>
+                        Цена клея за формат
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge partOfThePrice" id="countOfPagePrice"></span>
+                        Подбор блока
+                    </li>
+                    <li class="list-group-item" id="fillisterLi">
+                        <span class="badge partOfThePrice" id="fillisterPrice"></span>
+                        Фальцовка
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge partOfThePrice" id="blockPrice"></span>
+                        Формировка блока
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge partOfThePrice" id="trimmingBlockPrice"></span>
+                        Подрезка блока
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge partOfThePrice" id="decorativeStitchingPrice"></span>
+                        Декоративная строчка
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge partOfThePrice" id="cardboardPrice"></span>
+                        Основной материал обложки
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge partOfThePrice" id="bindingMaterialPrice"></span>
+                        Внешний материал обложки
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge partOfThePrice" id="printBlockPrice"></span>
+                        Печать блока
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge partOfThePrice" id="additionalCost"></span>
+                        Доп. стоимость
+                    </li>
+                </ul>
+                <table class="table" style="text-align: center;">
+                    <tr>
+                        <th>
+                            Кол-во
+                        </th>
+                        <th>
+                            Стоимость
+                        </th>
+                    </tr>
 
-            <div class="input-group myInputGroup">
-                <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Формат</span>
-                @Html.DropDownList("Format", ViewBag.Format as SelectList, "Выберите формат", new { @class = "form-control" })<br />
+                    <tr>
+                        <td>
+                            <p id="editionCirculationTable"></p>
+                        </td>
+                        <td>
+                            <p id="oneProductPrice"></p>
+                        </td>
+                    </tr>
+                    <tr class="success">
+                        <td>
+                            <b>Итого:</b>
+                        </td>
+                        <td>
+                            <p><b id="totalPrice"></b></p>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <hr />
-            
-            <h3>Блок</h3>
-            <div class="input-group myInputGroup">
-                <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Тип формировки блока</span>
-                @Html.DropDownList("FormingType", ViewBag.FormingType as SelectList, "Выберите тип формировки блока", new { @class = "form-control" })<br />
-            </div>
-            <div id="formingTypeBlock"></div>
-            <hr />
-
-            <h3>Обложка</h3>
-            <div class="input-group myInputGroup">
-                <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Основа обложки</span>
-                @Html.DropDownList("Cardboard", ViewBag.Cardboard as SelectList, "Выберите материал", new { @class = "form-control" })<br />
-            </div>
-            <br/>
-            <div class="input-group myInputGroup" style="border-radius: 3px; overflow: hidden;">
-                <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Внешний материал</span>
-                @Html.DropDownList("BindingMaterials", ViewBag.BindingMaterials as SelectList, "Выберите материал", new { @class = "form-control" })<br />
-            </div>
-
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" id="decorativeStitchingCheckbox" value="Декоративная строчка">
-                    Декоративная строчка
-                </label>
-            </div>
-            <hr />
-
-            <h4>
-                Итого:
-                <b id="totalPrice"></b>
-                <span class="glyphicon-rub" aria-hidden="true"></span>
-            </h4>
-            <button class="btn btn-primary" id="calculateButton">Рассчитать</button>
         </div>
-    </div>
-    <div class="col-xs-3">
-        <div class="container-fluid">
-            <h2>Цены</h2>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="badge partOfThePrice" id="gluePrice"></span>
-                    Цена клея за формат
-                </li>
-                <li class="list-group-item">
-                    <span class="badge partOfThePrice" id="countOfPagePrice"></span>
-                    Подбор блока
-                </li>
-                <li class="list-group-item" id="fillisterLi">
-                    <span class="badge partOfThePrice" id="fillisterPrice"></span>
-                    Фальцовка
-                </li>
-                <li class="list-group-item">
-                    <span class="badge partOfThePrice" id="blockPrice"></span>
-                    Формировка блока
-                </li>
-                <li class="list-group-item">
-                    <span class="badge partOfThePrice" id="trimmingBlockPrice"></span>
-                    Подрезка блока
-                </li>
-                <li class="list-group-item">
-                    <span class="badge partOfThePrice" id="decorativeStitchingPrice"></span>
-                    Декоративная строчка
-                </li>
-                <li class="list-group-item">
-                    <span class="badge partOfThePrice" id="cardboardPrice"></span>
-                    Основной материал обложки
-                </li>
-                <li class="list-group-item">
-                    <span class="badge partOfThePrice" id="bindingMaterialPrice"></span>
-                    Внешний материал обложки
-                </li>
-                <li class="list-group-item">
-                    <span class="badge partOfThePrice" id="printBlockPrice"></span>
-                    Печать блока
-                </li>
-            </ul>
-        </div>
-    </div>
+    </div>    
 </div>
 
 </body>

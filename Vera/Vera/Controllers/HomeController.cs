@@ -112,6 +112,12 @@ namespace Vera.Controllers
             return 0;
         }
 
+        public decimal GetAdditionalCost()
+        {
+            var job = db.Jobs.FirstOrDefault(x => x.JobTitle == "Доп. стоимость для каждого изделия");
+            return job.Pay.Cost * job.Pay.Currency.Rate;
+        }
+
         public void FillInTheDatabase()
         {
             //db.Currencies.Add(new Currency() { Name = "RUB", Rate = 1m });

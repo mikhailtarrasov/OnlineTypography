@@ -172,6 +172,16 @@ function setPrintingBlockPrice() {
     }
 }
 
+function setAdditionalCost() {
+    $.ajax({
+        type: 'POST',
+        url: "/Home/GetAdditionalCost",
+        success: function (data) {
+            $('#additionalCost').text(new Decimal(data));
+        }
+    });
+}
+
 function calculatePrice() {
     
     var decorativeStitchingPrice = $('#decorativeStitchingPrice').text();       /* true/false */
@@ -185,22 +195,26 @@ function calculatePrice() {
         var cardboardPrice          = new Decimal($('#cardboardPrice').text());
         var bindingMaterialPrice    = new Decimal($('#bindingMaterialPrice').text());
         var printBlockPrice         = new Decimal($('#printBlockPrice').text());
+        var additionalCost          = new Decimal($('#additionalCost').text());
 
-        var result = gluePrice.plus(countOfPagePrice)
+        var oneProductPrice = (gluePrice.plus(countOfPagePrice)
             .plus(fillisterPrice)
             .plus(blockPrice)
             .plus(trimmingBlockPrice)
             .plus(cardboardPrice)
             .plus(bindingMaterialPrice)
-            .plus(printBlockPrice);
+            .plus(printBlockPrice)
+            .plus(additionalCost)).toFixed(2);
 
-        $('#totalPrice').text(result);
+        var editionCirculation = new Decimal($('#editionCirculation').val()); // тираж (кол-во изделий)
+        var totalPrice = oneProductPrice * editionCirculation;
+
+        $('#oneProductPrice').text(oneProductPrice);
+        $('#editionCirculationTable').text(editionCirculation);
+        $('#totalPrice').text(totalPrice.toFixed(2));
     } catch (e) {
         alert('Введены не все данные! Проверьте формы ввода!');
     } 
-    
-
-
 }
 
 //function viewMoreForLogo() {
@@ -233,6 +247,7 @@ $(function() {
     setFillisterPrice();                        // Фальцовка
     setDecorativeStitchingPrice();              // Декоративная строчка true/false
     setTrimmingBlockPrice();                    // Подрезка блока
+    setAdditionalCost();                        // Дополнительная стоимость
 
     $('#Format').change(function () {
         // получаем выбранный id - его значение
