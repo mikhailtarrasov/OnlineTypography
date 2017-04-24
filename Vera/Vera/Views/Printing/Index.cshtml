@@ -1,0 +1,66 @@
+﻿@model Vera.Models.PrintingPriceViewModel
+@{
+    ViewBag.Title = "Печать";
+}
+<!DOCTYPE html>
+
+<html>
+<head> 
+    <script src="~/Scripts/printing-change.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8 col-md-6">
+
+                <h2>Редактировать цену печати</h2>
+                
+                @using (@Html.BeginForm())
+                {
+                    <div class="input-group myInputGroup">
+                        <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Формат</span>
+                        @Html.DropDownListFor(model => model.FormatId, ViewBag.Format as SelectList, "Выберите формат", new { @class = "form-control", required="required" })<br />
+                        @*@Html.DropDownList("Format", ViewBag.Format as SelectList, "Выберите формат", new { @class = "form-control" })<br />*@
+                    </div><br />
+
+                    <div class="input-group myInputGroup">
+                        <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Цветность печати</span>
+                        @Html.DropDownListFor(model => model.ColorfulnessId, ViewBag.Colorfulness as SelectList, "Выберите цветность печати", new { @class = "form-control", required = "required" })<br />
+                        @*@Html.DropDownList("Colorfulness", ViewBag.Colorfulness as SelectList, "Выберите цветность печати", new { @class = "form-control" })<br />*@
+                    </div><br />
+
+                    <div class="input-group myInputGroup">
+                        <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Стоимость за лист</span>
+                        @*@Html.EditorFor(model => model.NewCost, null, new { @class = "form-control" })*@
+                        @Html.TextBoxFor(model => model.NewCost, new
+                           {
+                               @class = "form-control",
+                               id = "printingPrice",
+                               autocomplete = "off",
+                               placeholder = "Выберите все значения",
+                               required = "required" 
+                           })
+                    </div><br />
+
+                    <div class="input-group myInputGroup">
+                        <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Валюта</span>
+                        <input type="text" class="form-control" id="currency" aria-describedby="basic-addon1"
+                               autocomplete="off"
+                               value="RUB"
+                               readonly="readonly">
+                    </div><br />
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" id="savePrintingPrice">Сохранить новую стоимость печати</button>
+                    @*<button type="reset" class="btn btn-default btn-lg btn-block" id="savePrintingPrice">Сбросить параметры</button>*@
+                }
+                <br />
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.ActionLink("Вернуться на главную страницу редактора", "Index", "Editor")
+        </div>
+    </div>
+</body>
+</html>
+

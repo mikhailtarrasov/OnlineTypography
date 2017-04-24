@@ -264,7 +264,7 @@ $(function() {
         $("#printBlockPrice").text(new Decimal(0));
 
         if (id == "") {
-            $('#formingTypeBlock').text(id); // Убираем блок, если не выбран тип формировки
+            $('#formingTypeBlock').text(id);                // Убираем блок, если не выбран тип формировки
 
             $('#countOfPagePrice').text(new Decimal(0));    // 
             $('#blockPrice').text(new Decimal(0));          // Обнуляем все данные, которые могли остаться с расчёта с выбранным блоком

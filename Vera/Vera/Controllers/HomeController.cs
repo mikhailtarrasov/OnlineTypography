@@ -10,12 +10,7 @@ namespace Vera.Controllers
     {
         //
         // GET: /Home/
-
         private DatabaseContext db = new DatabaseContext();
-        
-        //private decimal fillisterPrice = 0.5m;      // Фальцовка
-        //private decimal trimmingBlock = 10m;        // Подрезка блока
-                                            
 
         public ActionResult Index()
         {
