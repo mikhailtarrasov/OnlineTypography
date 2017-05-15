@@ -241,9 +241,9 @@ namespace Vera.Controllers
             //db.Colorfulnesses.Add(new Colorfulness() { Name = "4+1" });
             //db.Colorfulnesses.Add(new Colorfulness() { Name = "4+4" });
             //db.SaveChanges();
-            //decimal cost = 115;
+            //cost = 115;
 
-            //var rubCurr = db.Currencies.FirstOrDefault(x => x.Name == "RUB");
+            var rubCurr = db.Currencies.FirstOrDefault(x => x.Name == "RUB");
 
             //for (int i = 0; i <= 10; i++)
             //{
@@ -302,7 +302,7 @@ namespace Vera.Controllers
             //    cost /= 2;
             //}
 
-            // Фальцовка. Только для потетрадного типа формировки блока, умножается на кол-во тетрадей
+            ////Фальцовка. Только для потетрадного типа формировки блока, умножается на кол-во тетрадей
             //db.Jobs.Add(new Job()
             //{
             //    JobTitle = "Фальцовка",
@@ -322,9 +322,8 @@ namespace Vera.Controllers
             //    }
             //});
 
+            //db.Jobs.Add(new Job() { JobTitle = "Доп. стоимость для каждого изделия", Pay = new Price() { Cost = 1.234m, Currency = rubCurr } });
             //db.SaveChanges();
-
-            //db.Dispose();
         }
     }
 }

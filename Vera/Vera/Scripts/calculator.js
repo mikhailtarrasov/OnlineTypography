@@ -1,6 +1,6 @@
 ﻿function setGluePrice() {
     var id = $('#Format').val();
-    console.log(id);    // -
+    console.log(id);    
     if (id == "") {
         $('#gluePrice').text("Выберите формат");
     } else {
@@ -9,7 +9,7 @@
             url: "/Home/SetGluePrice/" + id,
             success: function (data) {
                 console.log(data);
-                $('#gluePrice').text(new Decimal(data));// заменяем содержимое присланным частичным представлением
+                $('#gluePrice').text(new Decimal(data));
             }
         });
     }
@@ -80,20 +80,25 @@ function setFillisterPrice() {
     }
 }
 
-function setDecorativeStitchingPrice() {
-    var text = $('#decorativeStitchingCheckbox').is(':checked');
-    $('#decorativeStitchingPrice').text(text);
-}
+//function setDecorativeStitchingPrice() {
+//    var text = $('#decorativeStitchingCheckbox').is(':checked');
+//    $('#decorativeStitchingPrice').text(text);
+//}
 
 function setTrimmingBlockPrice() {
-    $.ajax({                                    // Подрезка блока
-        type: 'POST',
-        url: "/Home/SetTrimmingBlockPrice/",
-        success: function (data) {
-            console.log(data);
-            $('#trimmingBlockPrice').text(new Decimal(data));
-        }
-    });
+    var idFormingType = $('#FormingType').val();
+    if (idFormingType == "") {
+        $('#trimmingBlockPrice').text(new Decimal(0));
+    } else {
+        $.ajax({                                    // Подрезка блока
+            type: 'POST',
+            url: "/Home/SetTrimmingBlockPrice/",
+            success: function (data) {
+                console.log(data);
+                $('#trimmingBlockPrice').text(new Decimal(data));
+            }
+        });
+    }   
 }
 
 function setCardboardPrice() {
@@ -184,7 +189,7 @@ function setAdditionalCost() {
 
 function calculatePrice() {
     
-    var decorativeStitchingPrice = $('#decorativeStitchingPrice').text();       /* true/false */
+    //var decorativeStitchingPrice = $('#decorativeStitchingPrice').text();       /* true/false */
 
     try {
         var gluePrice               = new Decimal($('#gluePrice').text());
@@ -245,12 +250,11 @@ $(function() {
     });
 
     setFillisterPrice();                        // Фальцовка
-    setDecorativeStitchingPrice();              // Декоративная строчка true/false
-    setTrimmingBlockPrice();                    // Подрезка блока
+    //setDecorativeStitchingPrice();              // Декоративная строчка true/false
+    //setTrimmingBlockPrice();                    // Подрезка блока
     setAdditionalCost();                        // Дополнительная стоимость
 
     $('#Format').change(function () {
-        // получаем выбранный id - его значение
         setCardboardPrice();
         setBindingMaterialPrice();
         setPrintingBlockPrice();
@@ -262,6 +266,7 @@ $(function() {
         var id = $(this).val();
 
         $("#printBlockPrice").text(new Decimal(0));
+        setTrimmingBlockPrice();
 
         if (id == "") {
             $('#formingTypeBlock').text(id);                // Убираем блок, если не выбран тип формировки
@@ -310,10 +315,10 @@ $(function() {
         setBindingMaterialPrice();
     });
 
-    $('#decorativeStitchingCheckbox').change(function () {
-        console.log($('#decorativeStitchingCheckbox').is(':checked'));
-        setDecorativeStitchingPrice();
-    });
+    //$('#decorativeStitchingCheckbox').change(function () {
+    //    console.log($('#decorativeStitchingCheckbox').is(':checked'));
+    //    setDecorativeStitchingPrice();
+    //});
 
     $('#calculateButton').click(function () {
         calculatePrice();

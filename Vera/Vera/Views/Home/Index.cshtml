@@ -47,12 +47,12 @@
                     @Html.DropDownList("BindingMaterials", ViewBag.BindingMaterials as SelectList, "Выберите материал", new { @class = "form-control" })<br />
                 </div>
 
-                <div class="checkbox">
+                @*<div class="checkbox">
                     <label>
                         <input type="checkbox" id="decorativeStitchingCheckbox" value="Декоративная строчка">
                         Декоративная строчка
                     </label>
-                </div>
+                </div>*@
                 <hr />
                 
                 <div class="input-group myInputGroup">
@@ -65,14 +65,6 @@
                 <br/>
                 <button class="btn btn-primary btn-lg btn-block" id="calculateButton">Пересчитать стоимость тиража</button>
                 <br />
-                @*<h4>
-                    Итого:
-                    <b id="totalPrice"></b>
-                    <span class="glyphicon-rub" aria-hidden="true"></span>
-                </h4>*@
-                
-
-                
             </div>
         </div>
         @*<div class="col-xs-3">*@
@@ -100,10 +92,10 @@
                         <span class="badge partOfThePrice" id="trimmingBlockPrice"></span>
                         Подрезка блока
                     </li>
-                    <li class="list-group-item">
+                    @*<li class="list-group-item">
                         <span class="badge partOfThePrice" id="decorativeStitchingPrice"></span>
                         Декоративная строчка
-                    </li>
+                    </li>*@
                     <li class="list-group-item">
                         <span class="badge partOfThePrice" id="cardboardPrice"></span>
                         Основной материал обложки

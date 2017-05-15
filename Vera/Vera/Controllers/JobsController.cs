@@ -21,7 +21,6 @@ namespace Vera.Controllers
         // GET: Jobs
         public ActionResult Index()
         {
-            
             var dbItems = db.Jobs.ToList();
             var jobsList = new List<JobViewModel>();
             foreach (var job in dbItems)
@@ -153,13 +152,6 @@ namespace Vera.Controllers
 
         private JobViewModel MappingJobToJobViewModel(Job job)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Job, JobViewModel>()
-                   .ForMember(x => x.Id, x => x.MapFrom(j => j.Id))
-                   .ForMember(x => x.JobTitle, x => x.MapFrom(j => j.JobTitle))
-                   .ForMember(x => x.Cost, x => x.MapFrom(j => job.Pay.Cost))
-                   .ForMember(x => x.CurrencyName, x => x.MapFrom(j => j.Pay.Currency.Name))
-                   .ForMember(x => x.CurrencyRate, x => x.MapFrom(j => j.Pay.Currency.Rate)));
-
             return Mapper.Map<Job, JobViewModel>(job);
         }
     }

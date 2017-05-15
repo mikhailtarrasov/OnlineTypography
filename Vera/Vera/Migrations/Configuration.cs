@@ -1,4 +1,4 @@
-namespace Vera.Migrations
+    namespace Vera.Migrations
 {
     using System.Data.Entity.Migrations;
 
@@ -10,6 +10,7 @@ namespace Vera.Migrations
 
             // register mysql code generator
             SetSqlGenerator("MySql.Data.MySqlClient", new MySql.Data.Entity.MySqlMigrationSqlGenerator());
+            SetHistoryContextFactory("MySql.Data.MySqlClient", (conn, schema) => new MySqlHistoryContext(conn, schema)); 
         }
 
         protected override void Seed(Vera.Domain.DatabaseContext context)
