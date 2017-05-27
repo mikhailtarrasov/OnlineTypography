@@ -1,0 +1,9 @@
+﻿<div class="input-group myInputGroup">
+    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Основа обложки</span>
+    @Html.DropDownList("Cardboard", ViewBag.Cardboard as SelectList, "Выберите материал", new { @class = "form-control" })<br />
+</div>
+<br />
+<div class="input-group myInputGroup" style="border-radius: 3px; overflow: hidden;">
+    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Внешний материал</span>
+    @Html.DropDownList("BindingMaterials", ViewBag.BindingMaterials as SelectList, "Выберите материал", new { @class = "form-control" })<br />
+</div>

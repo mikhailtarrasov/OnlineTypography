@@ -37,12 +37,17 @@ namespace Vera.Controllers
             var model = db.GluePrices.FirstOrDefault(x => x.Format.Id == id);
             return model.Price.Cost * model.Price.Currency.Rate;
         }
-    
-        public ActionResult FormingType(int id)
+
+        public ActionResult _FormingTypePartial(int id)
         {
             ViewBag.Colorfulness = new SelectList(db.Colorfulnesses, "Id", "Name");
             ViewBag.Paper = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Бумага"), "Id", "Name");
             return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
+        }
+
+        public ActionResult _PrintedCoverPartial()
+        {
+            return PartialView();
         }
 
         public decimal SetSewingPrice(string id)
@@ -151,7 +156,7 @@ namespace Vera.Controllers
 
             //decimal cost = 10.24m;
             //decimal area = 0.999949m;
-            //for (int i = 0; i < 11; i++)
+            //for (int i = 0; i < 8; i++)
             //{
             //    db.Prices.Add(new Price() { Cost = cost, Currency = rubCurrency });
             //    db.Formats.Add(new Format() { Name = "A" + i, Area = area });
@@ -243,7 +248,7 @@ namespace Vera.Controllers
             //db.SaveChanges();
             //cost = 115;
 
-            var rubCurr = db.Currencies.FirstOrDefault(x => x.Name == "RUB");
+            //var rubCurr = db.Currencies.FirstOrDefault(x => x.Name == "RUB");
 
             //for (int i = 0; i <= 10; i++)
             //{

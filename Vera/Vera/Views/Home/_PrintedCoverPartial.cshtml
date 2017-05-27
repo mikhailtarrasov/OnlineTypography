@@ -1,0 +1,11 @@
+﻿<div class="input-group myInputGroup">
+    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Цветность печати</span>
+    @Html.DropDownList("Colorfulness", ViewBag.Colorfulness as SelectList, "Выберите цветность печати", new { @class = "form-control" })<br />
+</div>
+<br />
+<div class="input-group myInputGroup">
+    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Бумага</span>
+    @Html.DropDownList("Paper", ViewBag.Paper as SelectList, "Выберите бумагу для печати", new { @class = "form-control" })<br />
+</div>
+<br />
+<div class="alert alert-info" id="printingAlert" role="alert"></div>

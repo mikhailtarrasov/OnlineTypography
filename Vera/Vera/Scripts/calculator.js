@@ -121,7 +121,8 @@ function setCardboardPrice() {
             }
         });
     } else {
-        $('#cardboardPrice').text("Введены не все данные");
+        //$('#cardboardPrice').text("Введены не все данные");
+        $('#cardboardPrice').text(new Decimal(0));
     }
 }
 
@@ -145,7 +146,8 @@ function setBindingMaterialPrice() {
             }
         });
     } else {
-        $('#bindingMaterialPrice').text("Введены не все данные");
+        //$('#bindingMaterialPrice').text("Введены не все данные");
+        $('#bindingMaterialPrice').text(new Decimal(0));
     }
 }
 
@@ -278,7 +280,7 @@ $(function() {
         } else {
             $.ajax({
                 type: 'POST',
-                url: "/Home/FormingType/" + id,
+                url: "/Home/_FormingTypePartial/" + id,
                 success: function (data) {
                     $('#formingTypeBlock').replaceWith(data),   // заменяем содержимое присланным частичным представлением
 
