@@ -1,9 +1,11 @@
 ﻿using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Vera.Domain.Entity;
+using Vera.Domain.Entity.Identity;
 
 namespace Vera.Domain
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : IdentityDbContext<User>
     {
         public DatabaseContext() : base("VeraDB") { }
         public DbSet<Currency> Currencies { get; set; }

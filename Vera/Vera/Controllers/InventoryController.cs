@@ -8,6 +8,7 @@ using Vera.Domain.Entity;
 
 namespace Vera.Controllers
 {
+    [Authorize(Roles = "manager, admin")]
     public class InventoryController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

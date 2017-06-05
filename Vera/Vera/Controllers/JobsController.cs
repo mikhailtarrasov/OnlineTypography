@@ -14,6 +14,7 @@ using WebGrease;
 
 namespace Vera.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class JobsController : Controller
     {
         private DatabaseContext db = new DatabaseContext();

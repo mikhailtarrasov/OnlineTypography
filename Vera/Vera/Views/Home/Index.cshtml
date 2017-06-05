@@ -64,48 +64,7 @@
         <div class="col-xs-6">
             <div class="container-fluid">
                 <h2>Цены</h2>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <span class="badge partOfThePrice" id="gluePrice"></span>
-                        Цена клея за формат
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge partOfThePrice" id="countOfPagePrice"></span>
-                        Подбор блока
-                    </li>
-                    <li class="list-group-item" id="fillisterLi">
-                        <span class="badge partOfThePrice" id="fillisterPrice"></span>
-                        Фальцовка
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge partOfThePrice" id="blockPrice"></span>
-                        Формировка блока
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge partOfThePrice" id="trimmingBlockPrice"></span>
-                        Подрезка блока
-                    </li>
-                    @*<li class="list-group-item">
-                        <span class="badge partOfThePrice" id="decorativeStitchingPrice"></span>
-                        Декоративная строчка
-                    </li>*@
-                    <li class="list-group-item">
-                        <span class="badge partOfThePrice" id="cardboardPrice"></span>
-                        Основной материал обложки
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge partOfThePrice" id="bindingMaterialPrice"></span>
-                        Внешний материал обложки
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge partOfThePrice" id="printBlockPrice"></span>
-                        Печать блока
-                    </li>
-                    <li class="list-group-item">
-                        <span class="badge partOfThePrice" id="additionalCost"></span>
-                        Доп. стоимость
-                    </li>
-                </ul>
+                @Html.Partial("_PriceDetailsPartial")
                 <table class="table table-bordered" style="text-align: center;">
                     <tr>
                         <th>
@@ -137,6 +96,5 @@
         </div>
     </div>    
 </div>
-
 </body>
 </html>
