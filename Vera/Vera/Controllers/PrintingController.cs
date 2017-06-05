@@ -8,6 +8,7 @@ using Vera.Models;
 
 namespace Vera.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class PrintingController : Controller
     {
         private DatabaseContext _db = new DatabaseContext();

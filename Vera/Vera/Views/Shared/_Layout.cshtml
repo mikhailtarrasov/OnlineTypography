@@ -59,14 +59,14 @@
                 <a class="navbar-brand" href="/Home/Index" style="margin-left: 0;">Vera</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right" style="margin-right: 0;">
+                <ul class="nav navbar-nav navbar-left" style="margin-right: 0;">
                     <li><a href="/Home/Index">Калькулятор</a></li>
                     <li><a href="/Inventory/Index">Инвентаризация</a></li>
                     <li><a href="/Editor/Index">Редактор</a></li>
-                    <li><a href="/Home/Login">Войти</a></li>
+                    <li>@*<a href="/Home/Login">Войти</a>*@</li>
                     <!--<li><button type="button" class="btn btn-default navbar-btn">Войти</button></li>-->
-
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </nav>
