@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Vera.Domain;
 using Vera.Domain.Entity;
+using Vera.Models;
 
 namespace Vera.Controllers
 {
@@ -19,12 +20,15 @@ namespace Vera.Controllers
             //FillInTheDatabase();
             /*--------------------------------Заполняем БД----------------------------------*/
 
-            ViewBag.Format = new SelectList(db.Formats, "Id", "Name");
-            ViewBag.FormingType = new SelectList(db.FormingTypes, "Id", "Name");
-            ViewBag.Cardboard = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Картон"), "Id", "Name");
-            ViewBag.BindingMaterials = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Переплетный материал"), "Id", "Name");
+            var calcViewModel = new CalculatorViewModel()
+            {
+                Format = new SelectList(db.Formats, "Id", "Name"),
+                FormingType = new SelectList(db.FormingTypes, "Id", "Name"),
+                Cardboard = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Картон"), "Id", "Name"),
+                BindingMaterials = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Переплетный материал"), "Id", "Name"),
+            };
 
-            return View();
+            return View(calcViewModel);
         }
 
         public decimal SetGluePrice(int id)
@@ -35,15 +39,29 @@ namespace Vera.Controllers
 
         public ActionResult _FormingTypePartial(int id)
         {
-            ViewBag.Colorfulness = new SelectList(db.Colorfulnesses, "Id", "Name");
-            ViewBag.Paper = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Бумага"), "Id", "Name");
-            return PartialView(db.FormingTypes.FirstOrDefault(x => x.Id == id));
+            var viewModel = new FormingTypeViewModel()
+            {
+                FormingTypeName = db.FormingTypes.FirstOrDefault(x => x.Id == id).Name,
+                Colorfulness = new SelectList(db.Colorfulnesses, "Id", "Name"),
+                Paper = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Бумага"), "Id", "Name")
+            };
+            return PartialView(viewModel);
         }
 
-        public ActionResult _PrintedCoverPartial()
-        {
-            return PartialView();
-        }
+        //public ActionResult _PrintPartial()
+        //{
+        //    return PartialView();
+        //}
+
+        //public ActionResult _PrintedCoverPartial()
+        //{
+        //    var viewModel = new PrintViewModel()
+        //    {
+        //        Colorfulness = new SelectList(db.Colorfulnesses, "Id", "Name"),
+        //        Paper = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Бумага"), "Id", "Name")
+        //    };
+        //    return PartialView(viewModel);
+        //}
 
         public ActionResult _PriceDetailsPartial()
         {

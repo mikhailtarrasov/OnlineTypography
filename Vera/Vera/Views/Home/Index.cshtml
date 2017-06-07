@@ -24,21 +24,23 @@
 
                 <div class="input-group myInputGroup">
                     <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Формат</span>
-                    @Html.DropDownList("Format", ViewBag.Format as SelectList, "Выберите формат", new { @class = "form-control" })<br />
+                    @Html.DropDownList("Format", Model.Format as SelectList, "Выберите формат", new { @class = "form-control" })<br />
                 </div>
                 <hr />
 
                 <h3>Блок</h3>
                 <div class="input-group myInputGroup">
                     <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Тип формировки блока</span>
-                    @Html.DropDownList("FormingType", ViewBag.FormingType as SelectList, "Выберите тип формировки блока", new { @class = "form-control" })<br />
+                    @Html.DropDownList("FormingType", Model.FormingType as SelectList, "Выберите тип формировки блока", new { @class = "form-control" })<br />
                 </div>
                 <div id="formingTypeBlock"></div>
                 <hr />
 
                 <h3>Обложка</h3>
-                @Html.Partial("_HardCoverPartial")
-                <div id=""></div>
+                <div id="cover">                 
+                    @Html.Partial("_HardCoverPartial")<br/>
+                    @*@Html.Partial("_PrintedCoverPartial")*@
+                </div>
 
                 @*<div class="checkbox">
                     <label>
