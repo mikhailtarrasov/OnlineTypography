@@ -243,6 +243,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MySqlHistoryContext.cs" />
+    <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\JobViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\PrintingPriceViewModel.cs" />
@@ -295,7 +296,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Inventory\Create.cshtml" />
     <Content Include="Views\Inventory\Delete.cshtml" />
@@ -312,11 +312,12 @@
     <Content Include="Views\Jobs\Index.cshtml" />
     <Content Include="Views\Printing\Index.cshtml" />
     <Content Include="Views\Home\_HardCoverPartial.cshtml" />
-    <Content Include="Views\Home\_PrintedCoverPartial.cshtml" />
+    <Content Include="Views\Home\_PrintPartial.cshtml" />
     <Content Include="Views\Home\_PriceDetailsPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\_PrintedCoverPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
