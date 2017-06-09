@@ -16,7 +16,8 @@ namespace Vera.Controllers
         // GET: Inventory
         public ActionResult Index()
         {
-            return View(db.Materials.ToList());
+            var materialsList = db.Materials.ToList();
+            return View(materialsList);
         }
 
         // GET: Inventory/Details/5
@@ -39,6 +40,7 @@ namespace Vera.Controllers
         {
             ViewBag.MaterialTypes = new SelectList(db.MaterialTypes, "Id", "TypeName");
             ViewBag.Currencies = new SelectList(db.Currencies, "Id", "Name");
+            ViewBag.Format = new SelectList(db.Formats, "Id", "Name");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace Vera.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Material material, decimal cost, int materialTypeId, int currencyId)
+        public ActionResult Create([Bind(Include = "Id,Name")] Material material, decimal cost, int materialTypeId, int currencyId, int? formatId, int? sheetsPerPackage)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +60,8 @@ namespace Vera.Controllers
                     Currency = db.Currencies.Find(currencyId)
                 };
                 material.Price = price;
+                material.Format = db.Formats.Find(formatId);
+                material.SheetsPerPackage = sheetsPerPackage;
                 db.Materials.Add(material);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -183,7 +187,7 @@ namespace Vera.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Income([Bind(Include = "Id, Name, Balance, Price, Type")] Material material, double? dBalance, decimal? newCost)   // Приход
+        public ActionResult Income([Bind(Include = "Id, Name, Balance, Price, Type, Format, SheetsPerPackage")] Material material, double? dBalance, decimal? newCost)   // Приход
         {
             if (ModelState.IsValid && dBalance != null)
             {

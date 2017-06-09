@@ -18,7 +18,7 @@ namespace Vera.Models
 
     }
 
-    public class CalculatorViewModel
+    public class CalculatorViewModel : PrintViewModel
     {
         public SelectList Format { get; set; }
         public SelectList FormingType { get; set; }

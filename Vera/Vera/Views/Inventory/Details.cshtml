@@ -31,7 +31,21 @@
             <dd>
                 @Html.DisplayFor(model => model.Price.Currency.Name)
             </dd>
-
+            @if (Model.Format != null && Model.SheetsPerPackage != null)
+            {
+                <dt>
+                    Формат
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Format.Name)
+                </dd>
+                <dt>
+                    Кол-во листов в упаковке
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SheetsPerPackage)
+                </dd>
+            }
             <dt>
                 Остаток
             </dt>

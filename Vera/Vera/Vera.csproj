@@ -241,6 +241,10 @@
     <Compile Include="Migrations\201705291344002_0.10_Identity.Designer.cs">
       <DependentUpon>201705291344002_0.10_Identity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706081828246_0.11_Add_fields_to_Material_for_paper.cs" />
+    <Compile Include="Migrations\201706081828246_0.11_Add_fields_to_Material_for_paper.Designer.cs">
+      <DependentUpon>201706081828246_0.11_Add_fields_to_Material_for_paper.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MySqlHistoryContext.cs" />
     <Compile Include="Models\HomeViewModels.cs" />
@@ -276,6 +280,7 @@
     <Content Include="Scripts\decimal.min.js" />
     <None Include="Properties\PublishProfiles\Masterhost.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\inventory.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-3.2.0.min.js" />
@@ -318,6 +323,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\_PrintedCoverPartial.cshtml" />
+    <Content Include="Views\Inventory\_PaperDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -358,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705291344002_0.10_Identity.resx">
       <DependentUpon>201705291344002_0.10_Identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706081828246_0.11_Add_fields_to_Material_for_paper.resx">
+      <DependentUpon>201706081828246_0.11_Add_fields_to_Material_for_paper.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

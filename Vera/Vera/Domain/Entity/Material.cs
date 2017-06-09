@@ -7,5 +7,7 @@
         public virtual Price Price { get; set; }
         public virtual MaterialType Type { get; set; }
         public double Balance { get; set; }
+        public virtual Format Format { get; set; }
+        public int? SheetsPerPackage { get; set; }
     }
 }
