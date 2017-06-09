@@ -30,7 +30,7 @@
 
                 <h3>Блок</h3>
                 <div class="input-group myInputGroup">
-                    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Тип формировки блока</span>
+                    <span class="input-group-addon myInputGroupSpan" id="basic-addon2">Тип формировки блока</span>
                     @Html.DropDownList("FormingType", Model.FormingType as SelectList, "Выберите тип формировки блока", new { @class = "form-control" })<br />
                 </div>
                 <div id="formingTypeBlock"></div>
@@ -51,11 +51,18 @@
                 <hr />
                 
                 <div class="input-group myInputGroup">
-                    <span class="input-group-addon myInputGroupSpan" id="basic-addon1">Тираж изделия</span>
-                    <input type="text" class="form-control" id="editionCirculation" aria-describedby="basic-addon1"
+                    <span class="input-group-addon myInputGroupSpan" id="basic-addon3">Тираж изделия</span>
+                    <input type="text" class="form-control" id="editionCirculation" aria-describedby="basic-addon3"
                            autocomplete="off"
                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                            value="1">
+                </div> <br>
+                <div class="input-group myInputGroup">
+                    <span class="input-group-addon myInputGroupSpan" id="basic-addon4">Коэффициент сложности</span>
+                    <input type="text" class="form-control" id="coefficientOfСomplexity" aria-describedby="basic-addon4"
+                           autocomplete="off"
+                           onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46'
+                           value="1.00">
                 </div>
                 <br/>
                 <button class="btn btn-primary btn-lg btn-block" id="calculateButton">Пересчитать стоимость тиража</button>
@@ -67,33 +74,7 @@
             <div class="container-fluid">
                 <h2>Цены</h2>
                 @Html.Partial("_PriceDetailsPartial")
-                <table class="table table-bordered" style="text-align: center;">
-                    <tr>
-                        <th>
-                            Кол-во
-                        </th>
-                        <th>
-                            Стоимость
-                        </th>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <p id="editionCirculationTable"></p>
-                        </td>
-                        <td>
-                            <p id="oneProductPrice"></p>
-                        </td>
-                    </tr>
-                    <tr class="active">
-                        <td>
-                            <b>Итого:</b>
-                        </td>
-                        <td>
-                            <p><b id="totalPrice"></b></p>
-                        </td>
-                    </tr>
-                </table>
+                @Html.Partial("_ResultPartial")
             </div>
         </div>
     </div>    

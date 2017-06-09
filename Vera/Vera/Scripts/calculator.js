@@ -213,8 +213,11 @@ function calculatePrice() {
             .plus(printBlockPrice)
             .plus(additionalCost)).toFixed(2);
 
-        var editionCirculation = new Decimal($('#editionCirculation').val()); // тираж (кол-во изделий)
-        var totalPrice = oneProductPrice * editionCirculation;
+        var editionCirculation = new Decimal($('#editionCirculation').val());               // тираж (кол-во изделий)
+        var coefficientOfСomplexity = new Decimal($('#coefficientOfСomplexity').val());     // коэффициент сложности
+        var totalPrice = coefficientOfСomplexity * oneProductPrice * editionCirculation;
+
+        oneProductPrice = oneProductPrice * coefficientOfСomplexity;
 
         $('#oneProductPrice').text(oneProductPrice);
         $('#editionCirculationTable').text(editionCirculation);
