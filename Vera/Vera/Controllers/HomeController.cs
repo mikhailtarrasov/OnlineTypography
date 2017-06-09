@@ -26,6 +26,12 @@ namespace Vera.Controllers
                 FormingType = new SelectList(db.FormingTypes, "Id", "Name"),
                 Cardboard = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Картон"), "Id", "Name"),
                 BindingMaterials = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Переплетный материал"), "Id", "Name"),
+                Colorfulness = new SelectList(db.Colorfulnesses, "Id", "Name"),
+                Paper = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Бумага").Select(x => new
+                {
+                    Id = x.Id,
+                    Name = x.Name + " " + x.Format.Name
+                }), "Id", "Name")
             };
 
             return View(calcViewModel);
@@ -43,7 +49,11 @@ namespace Vera.Controllers
             {
                 FormingTypeName = db.FormingTypes.FirstOrDefault(x => x.Id == id).Name,
                 Colorfulness = new SelectList(db.Colorfulnesses, "Id", "Name"),
-                Paper = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Бумага"), "Id", "Name")
+                Paper = new SelectList(db.Materials.Where(x => x.Type.TypeName == "Бумага").Select(x => new
+                {
+                    Id = x.Id,
+                    Name = x.Name + " " + x.Format.Name
+                }), "Id", "Name")
             };
             return PartialView(viewModel);
         }
@@ -123,7 +133,7 @@ namespace Vera.Controllers
                 var colorFormat = db.ColorfulnessPricePerFormats.FirstOrDefault(x => x.Format.Id == idFormat && x.Colorfulness.Id == idColorfulness);
                 var printingPricePerSheet = colorFormat.Price.Cost * colorFormat.Price.Currency.Rate;
                 var paper = db.Materials.Find(paperId);
-                var paperPricePerSheet = paper.Price.Cost * paper.Price.Currency.Rate / 500;                    //Делим на кол-во листов в упаковке
+                var paperPricePerSheet = paper.Price.Cost * paper.Price.Currency.Rate / paper.SheetsPerPackage.Value;                    //Делим на кол-во листов в упаковке
                 
                 return countOfPage.Value * (paperPricePerSheet + printingPricePerSheet);
             }

@@ -47,7 +47,14 @@
                 }>
                 
                 <td>
-                    @Html.ActionLink(item.Name, "Details", new {id = item.Id})
+                    @{
+                        var name = item.Name;
+                        if (item.Format != null && item.SheetsPerPackage != null)
+                        {
+                            name += " " + item.Format.Name + " (" + item.SheetsPerPackage.Value + " листов)";
+                        }
+                    }
+                    @Html.ActionLink(name, "Details", new { id = item.Id })
                     @*@Html.DisplayFor(modelItem => item.Name)*@
                 </td>
                 <td class="hidden-xs">

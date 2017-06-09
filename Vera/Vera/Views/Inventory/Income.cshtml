@@ -24,6 +24,8 @@
         @Html.HiddenFor(model => model.Price.Currency.Id)
         @Html.HiddenFor(model => model.Price.Currency.Name)
         @Html.HiddenFor(model => model.Price.Currency.Rate)
+        @Html.HiddenFor(model => model.SheetsPerPackage)
+
 
         <div class="form-group">
             @Html.Label("Материал", htmlAttributes: new { @class = "control-label col-xs-3 col-md-2" })
@@ -31,7 +33,21 @@
                 @Model.Name
             </div>
         </div>
-
+        @if (Model.Format != null && Model.SheetsPerPackage != null)
+        {
+            <div class="form-group">
+                @Html.Label("Формат", htmlAttributes: new { @class = "control-label col-xs-3 col-md-2" })
+                <div class="col-xs-4">
+                    @Model.Format.Name
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Кол-во л/уп", htmlAttributes: new { @class = "control-label col-xs-3 col-md-2" })
+                <div class="col-xs-4">
+                    @Model.SheetsPerPackage.Value
+                </div>
+            </div>
+        }
         <div class="form-group">
             @Html.Label("Пришло", htmlAttributes: new { @class = "control-label col-xs-3 col-md-2" })
             <div class="col-xs-4">
