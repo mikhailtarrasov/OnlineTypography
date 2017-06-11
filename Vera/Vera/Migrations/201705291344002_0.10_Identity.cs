@@ -11,9 +11,9 @@ namespace Vera.Migrations
                 "dbo.AspNetRoles",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        Name = c.String(nullable: false, maxLength: 256, storeType: "nvarchar"),
-                        Discriminator = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
+                        Id = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
+                        Name = c.String(nullable: false, maxLength: 200, storeType: "nvarchar"),
+                        Discriminator = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
@@ -22,8 +22,8 @@ namespace Vera.Migrations
                 "dbo.AspNetUserRoles",
                 c => new
                     {
-                        UserId = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        RoleId = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
+                        UserId = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
+                        RoleId = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
                 .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
@@ -35,8 +35,8 @@ namespace Vera.Migrations
                 "dbo.AspNetUsers",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        Email = c.String(maxLength: 256, storeType: "nvarchar"),
+                        Id = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
+                        Email = c.String(maxLength: 200, storeType: "nvarchar"),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(unicode: false),
                         SecurityStamp = c.String(unicode: false),
@@ -46,7 +46,7 @@ namespace Vera.Migrations
                         LockoutEndDateUtc = c.DateTime(precision: 0),
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256, storeType: "nvarchar"),
+                        UserName = c.String(nullable: false, maxLength: 200, storeType: "nvarchar"),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
@@ -56,7 +56,7 @@ namespace Vera.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
+                        UserId = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
                         ClaimType = c.String(unicode: false),
                         ClaimValue = c.String(unicode: false),
                     })
@@ -68,9 +68,9 @@ namespace Vera.Migrations
                 "dbo.AspNetUserLogins",
                 c => new
                     {
-                        LoginProvider = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        ProviderKey = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        UserId = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
+                        LoginProvider = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
+                        ProviderKey = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
+                        UserId = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)

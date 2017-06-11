@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Vera.Domain.Entity;
 
 namespace Vera.Models
 {
@@ -24,5 +26,6 @@ namespace Vera.Models
         public SelectList FormingType { get; set; }
         public SelectList Cardboard { get; set; }
         public SelectList BindingMaterials { get; set; }
+        public List<Job> Jobs { get; set; }
     }
 }

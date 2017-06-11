@@ -31,7 +31,8 @@ namespace Vera.Controllers
                 {
                     Id = x.Id,
                     Name = x.Name + " " + x.Format.Name
-                }), "Id", "Name")
+                }), "Id", "Name"),
+                Jobs = db.Jobs.ToList()
             };
 
             return View(calcViewModel);
@@ -355,7 +356,25 @@ namespace Vera.Controllers
             //    }
             //});
 
+
             //db.Jobs.Add(new Job() { JobTitle = "Доп. стоимость для каждого изделия", Pay = new Price() { Cost = 1.234m, Currency = rubCurr } });
+            //db.SaveChanges();
+            //db.JobDependencies.RemoveRange(db.JobDependencies);
+            //var constant = new JobDependency()
+            //{
+            //    Name = "Изделие"
+            //};
+            //var sheets = new JobDependency()
+            //{
+            //    Name = "Лист"
+            //};
+            //var notebooks = new JobDependency()
+            //{
+            //    Name = "Тетрадь"
+            //};
+            //db.JobDependencies.Add(constant);
+            //db.JobDependencies.Add(sheets);
+            //db.JobDependencies.Add(notebooks);
             //db.SaveChanges();
         }
     }

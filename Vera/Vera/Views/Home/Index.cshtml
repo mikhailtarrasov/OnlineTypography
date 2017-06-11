@@ -38,7 +38,7 @@
 
                 <h3>Обложка</h3>
                 <div id="cover">                 
-                    @Html.Partial("_HardCoverPartial")<br/>
+                    @Html.Partial("_HardCoverPartial")
                     @*@Html.Partial("_PrintedCoverPartial")*@
                 </div>
 
@@ -49,7 +49,11 @@
                     </label>
                 </div>*@
                 <hr />
-                
+
+                <h3>Услуги/работа</h3>
+                @Html.Partial("_JobsPartial")
+                <hr/>
+
                 <div class="input-group myInputGroup">
                     <span class="input-group-addon myInputGroupSpan" id="basic-addon3">Тираж изделия</span>
                     <input type="text" class="form-control" id="editionCirculation" aria-describedby="basic-addon3"
@@ -63,10 +67,8 @@
                            autocomplete="off"
                            onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46'
                            value="1.00">
-                </div>
-                <br/>
-                <button class="btn btn-primary btn-lg btn-block" id="calculateButton">Пересчитать стоимость тиража</button>
-                <br />
+                </div><br/>                
+                <button class="btn btn-primary btn-lg btn-block" id="calculateButton">Пересчитать стоимость тиража</button><br />
             </div>
         </div>
         @*<div class="col-xs-3">*@

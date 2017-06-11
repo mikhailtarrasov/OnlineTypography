@@ -145,18 +145,18 @@ namespace Vera.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-        //public void CreateRole(string roleName)
-        //{
-        //    roleName = "admin";
-        //    var roleManager = HttpContext.GetOwinContext().GetUserManager<RoleManager<Role>>();
+        public void CreateRole(string roleName)
+        {
+            roleName = "admin";
+            var roleManager = HttpContext.GetOwinContext().GetUserManager<RoleManager<Role>>();
 
-        //    if (!roleManager.RoleExists(roleName))
-        //        roleManager.Create(new Role(roleName));
-        //    roleName = "manager";
-        //    if (!roleManager.RoleExists(roleName))
-        //        roleManager.Create(new Role(roleName));
-        //    // rest of code
-        //} 
+            if (!roleManager.RoleExists(roleName))
+                roleManager.Create(new Role(roleName));
+            roleName = "manager";
+            if (!roleManager.RoleExists(roleName))
+                roleManager.Create(new Role(roleName));
+            // rest of code
+        } 
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

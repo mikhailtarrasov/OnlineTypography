@@ -193,6 +193,7 @@
     <Compile Include="Domain\DatabaseContext.cs" />
     <Compile Include="Domain\Entity\Identity\Role.cs" />
     <Compile Include="Domain\Entity\Job.cs" />
+    <Compile Include="Domain\Entity\JobDependency.cs" />
     <Compile Include="Domain\Entity\Material.cs" />
     <Compile Include="Domain\Entity\MaterialType.cs" />
     <Compile Include="Domain\Entity\Price.cs" />
@@ -244,6 +245,10 @@
     <Compile Include="Migrations\201706081828246_0.11_Add_fields_to_Material_for_paper.cs" />
     <Compile Include="Migrations\201706081828246_0.11_Add_fields_to_Material_for_paper.Designer.cs">
       <DependentUpon>201706081828246_0.11_Add_fields_to_Material_for_paper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706092022087_0.12_Add_JobDependencies.cs" />
+    <Compile Include="Migrations\201706092022087_0.12_Add_JobDependencies.Designer.cs">
+      <DependentUpon>201706092022087_0.12_Add_JobDependencies.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\MySqlHistoryContext.cs" />
@@ -325,6 +330,7 @@
     <Content Include="Views\Home\_PrintedCoverPartial.cshtml" />
     <Content Include="Views\Inventory\_PaperDetailsPartial.cshtml" />
     <Content Include="Views\Home\_ResultPartial.cshtml" />
+    <Content Include="Views\Home\_JobsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -368,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706081828246_0.11_Add_fields_to_Material_for_paper.resx">
       <DependentUpon>201706081828246_0.11_Add_fields_to_Material_for_paper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706092022087_0.12_Add_JobDependencies.resx">
+      <DependentUpon>201706092022087_0.12_Add_JobDependencies.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

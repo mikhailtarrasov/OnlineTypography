@@ -46,34 +46,36 @@ namespace Vera.Controllers
         //    return View(job);
         //}
 
-        //// GET: Jobs/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        // GET: Jobs/Create
+        public ActionResult Create()
+        {
+            ViewBag.Dependencies = new SelectList(db.JobDependencies, "Id", "Name");
+            return View();
+        }
 
-        //// POST: Jobs/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,JobTitle")] Job job, decimal? cost)
-        //{
-        //    if (ModelState.IsValid && cost != null)
-        //    {
-        //        var price = new Price()
-        //        {
-        //            Cost = cost.Value,
-        //            Currency = db.Currencies.FirstOrDefault(x => x.Name == "RUB")
-        //        };
-        //        job.Pay = price;
-        //        db.Jobs.Add(job);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+        // POST: Jobs/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,JobTitle")] Job job, decimal? cost, int dependencyId)
+        {
+            if (ModelState.IsValid && cost != null)
+            {
+                var price = new Price()
+                {
+                    Cost = cost.Value,
+                    Currency = db.Currencies.FirstOrDefault(x => x.Name == "RUB")
+                };
+                job.Pay = price;
+                job.Dependency = db.JobDependencies.FirstOrDefault(x => x.Id == dependencyId);
+                db.Jobs.Add(job);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-        //    return View(job);
-        //}
+            return View(job);
+        }
 
         // GET: Jobs/Edit/5
         public ActionResult Edit(int? id)

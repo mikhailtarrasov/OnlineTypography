@@ -8,9 +8,9 @@
 <div class="container-fluid">
     <h2>Работа</h2>
 
-    @*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
+    <p>
+        @Html.ActionLink("Добавить новую услугу/работу", "Create")
+    </p>
     <table class="table">
         <tr>
             <th>
@@ -21,6 +21,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model[0].CurrencyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].DependencyName)
             </th>
             <th></th>
         </tr>
@@ -36,6 +39,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CurrencyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DependencyName)
                 </td>
                 <td>
                     <a class="btn btn-primary" href="/Jobs/Edit/@item.Id" role="button">

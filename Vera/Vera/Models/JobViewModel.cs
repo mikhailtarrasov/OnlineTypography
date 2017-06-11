@@ -17,5 +17,7 @@ namespace Vera.Models
         public string CurrencyName { get; set; }
         [Display(Name = "Курс валюты")]
         public decimal CurrencyRate { get; set; }
+        [Display(Name = "Цена на")]
+        public string DependencyName { get; set; }
     }
 }
