@@ -153,7 +153,7 @@ namespace Vera.Controllers
             base.Dispose(disposing);
         }
 
-        private JobViewModel MappingJobToJobViewModel(Job job)
+        public static JobViewModel MappingJobToJobViewModel(Job job)
         {
             return Mapper.Map<Job, JobViewModel>(job);
         }
