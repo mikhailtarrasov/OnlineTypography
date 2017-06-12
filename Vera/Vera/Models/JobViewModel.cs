@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Vera.Models
 {
@@ -17,7 +18,10 @@ namespace Vera.Models
         public string CurrencyName { get; set; }
         [Display(Name = "Курс валюты")]
         public decimal CurrencyRate { get; set; }
+        public int DependencyId { get; set; }
         [Display(Name = "Цена на")]
         public string DependencyName { get; set; }
+        [Display(Name = "Цена на")]
+        public SelectList Dependencies { get; set; }
     }
 }

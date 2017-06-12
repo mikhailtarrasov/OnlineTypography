@@ -89,7 +89,9 @@ namespace Vera.Controllers
             {
                 return HttpNotFound();
             }
-            return View(MappingJobToJobViewModel(job));
+            var jobVM = MappingJobToJobViewModel(job);
+            jobVM.Dependencies = new SelectList(db.JobDependencies, "Id", "Name");
+            return View(jobVM);
         }
 
         // POST: Jobs/Edit/5
@@ -100,13 +102,13 @@ namespace Vera.Controllers
         //public ActionResult Edit([Bind(Include = "Id,JobTitle")] Job job)
         public ActionResult Edit(JobViewModel jobViewModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && jobViewModel.DependencyId != null)
             {
                 try
                 {
                     var dbJob = db.Jobs.Find(jobViewModel.Id);
                     dbJob.Pay.Cost = jobViewModel.Cost;
-
+                    dbJob.Dependency = db.JobDependencies.Find(jobViewModel.DependencyId);
                     db.SaveChanges();
                 }
                 catch (Exception e)

@@ -42,6 +42,14 @@
         </div>
 
         <div class="form-group">
+            @Html.Label(@Html.NameFor(model => model.Dependencies).ToHtmlString(), htmlAttributes: new { @class = "control-label col-xs-3 col-md-2" })
+            <div class="col-xs-4">
+                @Html.DropDownListFor(model => model.DependencyId, Model.Dependencies, "Выберите зависимость", new { @class = "form-control" })
+                @*@Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-md-offset-2 col-xs-offset-3 col-md-10">
                 <input type="submit" value="Применить" class="btn btn-default" />
             </div>
