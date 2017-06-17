@@ -27,13 +27,14 @@ namespace Vera
         }
 
         public void InitialiseMapping()
-        {
+        {               
             Mapper.Initialize(cfg => cfg.CreateMap<Job, JobViewModel>()
                    .ForMember(x => x.Id, x => x.MapFrom(j => j.Id))
                    .ForMember(x => x.JobTitle, x => x.MapFrom(j => j.JobTitle))
                    .ForMember(x => x.Cost, x => x.MapFrom(j => j.Pay.Cost))
                    .ForMember(x => x.CurrencyName, x => x.MapFrom(j => j.Pay.Currency.Name))
-                   .ForMember(x => x.CurrencyRate, x => x.MapFrom(j => j.Pay.Currency.Rate)));
+                   .ForMember(x => x.CurrencyRate, x => x.MapFrom(j => j.Pay.Currency.Rate))
+                   .ForMember(x => x.DependencyName, x => x.MapFrom(j => j.Dependency.Name)));
         }
     }
 }

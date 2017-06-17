@@ -46,34 +46,36 @@ namespace Vera.Controllers
         //    return View(job);
         //}
 
-        //// GET: Jobs/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        // GET: Jobs/Create
+        public ActionResult Create()
+        {
+            ViewBag.Dependencies = new SelectList(db.JobDependencies, "Id", "Name");
+            return View();
+        }
 
-        //// POST: Jobs/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,JobTitle")] Job job, decimal? cost)
-        //{
-        //    if (ModelState.IsValid && cost != null)
-        //    {
-        //        var price = new Price()
-        //        {
-        //            Cost = cost.Value,
-        //            Currency = db.Currencies.FirstOrDefault(x => x.Name == "RUB")
-        //        };
-        //        job.Pay = price;
-        //        db.Jobs.Add(job);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+        // POST: Jobs/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,JobTitle")] Job job, decimal? cost, int dependencyId)
+        {
+            if (ModelState.IsValid && cost != null)
+            {
+                var price = new Price()
+                {
+                    Cost = cost.Value,
+                    Currency = db.Currencies.FirstOrDefault(x => x.Name == "RUB")
+                };
+                job.Pay = price;
+                job.Dependency = db.JobDependencies.FirstOrDefault(x => x.Id == dependencyId);
+                db.Jobs.Add(job);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-        //    return View(job);
-        //}
+            return View(job);
+        }
 
         // GET: Jobs/Edit/5
         public ActionResult Edit(int? id)
@@ -87,7 +89,9 @@ namespace Vera.Controllers
             {
                 return HttpNotFound();
             }
-            return View(MappingJobToJobViewModel(job));
+            var jobVM = MappingJobToJobViewModel(job);
+            jobVM.Dependencies = new SelectList(db.JobDependencies, "Id", "Name");
+            return View(jobVM);
         }
 
         // POST: Jobs/Edit/5
@@ -98,13 +102,13 @@ namespace Vera.Controllers
         //public ActionResult Edit([Bind(Include = "Id,JobTitle")] Job job)
         public ActionResult Edit(JobViewModel jobViewModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && jobViewModel.DependencyId != null)
             {
                 try
                 {
                     var dbJob = db.Jobs.Find(jobViewModel.Id);
                     dbJob.Pay.Cost = jobViewModel.Cost;
-
+                    dbJob.Dependency = db.JobDependencies.Find(jobViewModel.DependencyId);
                     db.SaveChanges();
                 }
                 catch (Exception e)
@@ -151,7 +155,7 @@ namespace Vera.Controllers
             base.Dispose(disposing);
         }
 
-        private JobViewModel MappingJobToJobViewModel(Job job)
+        public static JobViewModel MappingJobToJobViewModel(Job job)
         {
             return Mapper.Map<Job, JobViewModel>(job);
         }

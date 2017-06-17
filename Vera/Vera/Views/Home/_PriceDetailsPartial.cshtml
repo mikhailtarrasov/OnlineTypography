@@ -5,26 +5,30 @@
         <span class="badge partOfThePrice" id="gluePrice"></span>
         Цена клея за формат
     </li>
-    <li class="list-group-item">
+    @*<li class="list-group-item">
         <span class="badge partOfThePrice" id="countOfPagePrice"></span>
         Подбор блока
-    </li>
-    <li class="list-group-item" id="fillisterLi">
+    </li>*@
+    @*<li class="list-group-item" id="fillisterLi">
         <span class="badge partOfThePrice" id="fillisterPrice"></span>
         Фальцовка
-    </li>
+    </li>*@
     <li class="list-group-item">
         <span class="badge partOfThePrice" id="blockPrice"></span>
         Формировка блока
     </li>
-    <li class="list-group-item">
+    @*<li class="list-group-item">
         <span class="badge partOfThePrice" id="trimmingBlockPrice"></span>
         Подрезка блока
-    </li>
+    </li>*@
     @*<li class="list-group-item">
             <span class="badge partOfThePrice" id="decorativeStitchingPrice"></span>
             Декоративная строчка
         </li>*@
+    <li class="list-group-item">
+        <span class="badge partOfThePrice" id="printBlockPrice"></span>
+        Печать блока
+    </li>
     <li class="list-group-item">
         <span class="badge partOfThePrice" id="cardboardPrice"></span>
         Основной материал обложки
@@ -33,12 +37,15 @@
         <span class="badge partOfThePrice" id="bindingMaterialPrice"></span>
         Внешний материал обложки
     </li>
-    <li class="list-group-item">
-        <span class="badge partOfThePrice" id="printBlockPrice"></span>
-        Печать блока
-    </li>
-    <li class="list-group-item">
+    @*<li class="list-group-item">
         <span class="badge partOfThePrice" id="additionalCost"></span>
         Доп. стоимость
-    </li>
+    </li>*@
+    @foreach (var job in Model.Jobs)
+    {
+        <li class="list-group-item">
+            <span class="badge partOfThePrice" id="@job.Id"></span>
+            @job.JobTitle
+        </li>
+    }
 </ul>

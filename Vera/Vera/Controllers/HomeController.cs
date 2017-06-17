@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Vera.Domain;
@@ -19,6 +20,12 @@ namespace Vera.Controllers
             /*--------------------------------Заполняем БД----------------------------------*/
             //FillInTheDatabase();
             /*--------------------------------Заполняем БД----------------------------------*/
+            var dbItems = db.Jobs.ToList();
+            var jobsList = new List<JobViewModel>();
+            foreach (var job in dbItems)
+            {
+                jobsList.Add(JobsController.MappingJobToJobViewModel(job));
+            }
 
             var calcViewModel = new CalculatorViewModel()
             {
@@ -31,7 +38,8 @@ namespace Vera.Controllers
                 {
                     Id = x.Id,
                     Name = x.Name + " " + x.Format.Name
-                }), "Id", "Name")
+                }), "Id", "Name"),
+                Jobs = jobsList
             };
 
             return View(calcViewModel);
@@ -140,11 +148,11 @@ namespace Vera.Controllers
             return 0;
         }
 
-        public decimal GetAdditionalCost()
-        {
-            var job = db.Jobs.FirstOrDefault(x => x.JobTitle == "Доп. стоимость для каждого изделия");
-            return job.Pay.Cost * job.Pay.Currency.Rate;
-        }
+        //public decimal GetAdditionalCost()
+        //{
+        //    var job = db.Jobs.FirstOrDefault(x => x.JobTitle == "Доп. стоимость для каждого изделия");
+        //    return job.Pay.Cost * job.Pay.Currency.Rate;
+        //}
 
         public void FillInTheDatabase()
         {
@@ -355,7 +363,25 @@ namespace Vera.Controllers
             //    }
             //});
 
+
             //db.Jobs.Add(new Job() { JobTitle = "Доп. стоимость для каждого изделия", Pay = new Price() { Cost = 1.234m, Currency = rubCurr } });
+            //db.SaveChanges();
+            //db.JobDependencies.RemoveRange(db.JobDependencies);
+            //var constant = new JobDependency()
+            //{
+            //    Name = "Изделие"
+            //};
+            //var sheets = new JobDependency()
+            //{
+            //    Name = "Лист"
+            //};
+            //var notebooks = new JobDependency()
+            //{
+            //    Name = "Тетрадь"
+            //};
+            //db.JobDependencies.Add(constant);
+            //db.JobDependencies.Add(sheets);
+            //db.JobDependencies.Add(notebooks);
             //db.SaveChanges();
         }
     }

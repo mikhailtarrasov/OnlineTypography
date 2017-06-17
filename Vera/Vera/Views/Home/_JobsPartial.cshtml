@@ -1,0 +1,11 @@
+﻿<div class="container-fluid" style="text-align: left">
+    @foreach (var job in Model.Jobs)
+    {
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" class="jobCheckbox" name ="@job.DependencyName" id="@job.Id" value="@job.Cost">
+                @job.JobTitle
+            </label>
+        </div>
+    }
+</div>
