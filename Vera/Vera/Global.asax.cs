@@ -1,8 +1,21 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Data;
+using System.Linq;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using AutoMapper;
+using NCron.Fluent;
+using NCron.Fluent.Crontab;
+using NCron.Fluent.Generics;
+using NCron.Fluent.Reflection;
+using NCron.Integration.NLog;
+using NCron.Service;
+using Vera.CBR;
+using Vera.Domain;
 using Vera.Domain.Entity;
 using Vera.Models;
 
@@ -14,6 +27,8 @@ namespace Vera
     // visit http://go.microsoft.com/?LinkId=9394801
     public class MvcApplication : System.Web.HttpApplication
     {
+        private static SchedulingService schedulingService { get; set; }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -24,9 +39,20 @@ namespace Vera
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             InitialiseMapping();
+            InitialiseSchedulingService();
+            //var di = new CBRService.DailyInfoSoapClient();
+            //var curs = di.GetCursDynamic(new DateTime(2017, 1, 1), DateTime.Now, "R01235");   
         }
 
-        public void InitialiseMapping()
+        private void InitialiseSchedulingService()
+        {
+            schedulingService = new SchedulingService();
+            schedulingService.LogFactory = new NLogFactory();
+            schedulingService.Hourly().Run<CurrenciesUpdater>();
+            schedulingService.Start();
+        }
+
+        private void InitialiseMapping()
         {               
             Mapper.Initialize(cfg => cfg.CreateMap<Job, JobViewModel>()
                    .ForMember(x => x.Id, x => x.MapFrom(j => j.Id))
