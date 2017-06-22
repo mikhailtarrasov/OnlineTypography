@@ -148,11 +148,13 @@ namespace Vera.Controllers
             return 0;
         }
 
-        //public decimal GetAdditionalCost()
-        //{
-        //    var job = db.Jobs.FirstOrDefault(x => x.JobTitle == "Доп. стоимость для каждого изделия");
-        //    return job.Pay.Cost * job.Pay.Currency.Rate;
-        //}
+        public decimal GetCostForJobPerFormatId(int jobId, int idFormat)
+        {
+            var format = db.Formats.Find(idFormat);
+            var job = db.Jobs.Find(jobId);
+            var jobCostPerFormatArea = format.Area * job.Pay.Cost;
+            return jobCostPerFormatArea;
+        }
 
         public void FillInTheDatabase()
         {
