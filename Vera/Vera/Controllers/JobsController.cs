@@ -107,6 +107,7 @@ namespace Vera.Controllers
                 try
                 {
                     var dbJob = db.Jobs.Find(jobViewModel.Id);
+                    dbJob.JobTitle = jobViewModel.JobTitle;
                     dbJob.Pay.Cost = jobViewModel.Cost;
                     dbJob.Dependency = db.JobDependencies.Find(jobViewModel.DependencyId);
                     db.SaveChanges();

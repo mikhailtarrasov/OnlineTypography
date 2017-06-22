@@ -151,7 +151,7 @@ function printPriceBlocksForJobs() {
     $('.jobCheckbox').change(function () {
         var idCheckbox = this.id;
         var priceElement = '#' + idCheckbox + '.partOfThePrice';
-        if ($('#' + idCheckbox).is(':checked') == true) {
+        if ($('#' + idCheckbox).is(':checked') === true) {
             var cost = this.value.replace(/,/, '.');
             switch (this.name) {
                 case 'Лист':
@@ -161,6 +161,10 @@ function printPriceBlocksForJobs() {
                     cost = getCostForJobPerTetr(cost);
                     break;
                 case 'Изделие':
+                    break;
+                case 'Формат':
+                    var formatId = $('#Format').val();
+                    cost = getCostForJobPerFormatId(idCheckbox, formatId);
                     break;
                 default:
                     cost = 0;
@@ -189,6 +193,20 @@ function getCostForJobPerPage(cost) {
     else cost = 0;
     return cost;
 }
+
+function getCostForJobPerFormatId(jobId, idFormat) {
+    var result = 0;
+    if (idFormat !== "" && jobId !== "") {
+        $.ajax({
+            type: 'POST',
+            url: "/Home/GetCostForJobPerFormatId?jobId=" + jobId + "&idFormat=" + idFormat,
+            success: function (data) {
+                result = data;
+            }
+        });
+    }
+    return result;
+};
 
 function setJobsPricesPerPage(pageCount) {
     $('.jobCheckbox').each(function() {
@@ -221,12 +239,27 @@ function setJobsPricesPerTetr(tetrCount) {
     });
 };
 
+function setJobsPricesPerFormat() {
+    $('.jobCheckbox').each(function () {
+        var idCheckbox = this.id;
+        var priceElement = '#' + idCheckbox + '.partOfThePrice';
+        var cost;
+        if (this.name === 'Формат') {
+            if ($('#' + idCheckbox).is(':checked') === true) {
+                var idFormat = $('#Format').val();
+                cost = getCostForJobPerFormatId(idCheckbox, idFormat);
+            } else cost = 0;
+            $(priceElement).text(cost);
+        }
+    });
+};
+
 function jobPricesInit() {
     var idFormingType = $('#FormingType').val();
     $('.jobCheckbox').each(function () {
         var idCheckbox = this.id;
         var priceElement = '#' + idCheckbox + '.partOfThePrice';
-        if ($('#' + idCheckbox).is(':checked') == true) {
+        if ($('#' + idCheckbox).is(':checked') === true) {
             var cost = this.value.replace(/,/, '.');
             switch (this.name) {
                 case 'Лист':
@@ -236,6 +269,10 @@ function jobPricesInit() {
                     cost = getCostForJobPerTetr(cost);
                     break;
                 case 'Изделие':
+                    break;
+                case 'Формат':
+                    var formatId = $('#Format').val();
+                    cost = getCostForJobPerFormatId(idCheckbox, formatId);
                     break;
                 default:
                     cost = 0;
@@ -260,6 +297,7 @@ $(function() {
         setCardboardPrice();
         setBindingMaterialPrice();
         setPrintingBlockPrice();
+        setJobsPricesPerFormat();
 
         setGluePrice();
     });

@@ -39,16 +39,14 @@ namespace Vera
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             InitialiseMapping();
-            InitialiseSchedulingService();
-            //var di = new CBRService.DailyInfoSoapClient();
-            //var curs = di.GetCursDynamic(new DateTime(2017, 1, 1), DateTime.Now, "R01235");   
+            InitialiseSchedulingService();  
         }
 
         private void InitialiseSchedulingService()
         {
             schedulingService = new SchedulingService();
             schedulingService.LogFactory = new NLogFactory();
-            schedulingService.Hourly().Run<CurrenciesUpdater>();
+            schedulingService.At("0 3 * * *").Run<CurrenciesUpdater>(); // 3:00 UTC
             schedulingService.Start();
         }
 
