@@ -26,6 +26,6 @@ namespace Vera.Models
         public SelectList FormingType { get; set; }
         public SelectList Cardboard { get; set; }
         public SelectList BindingMaterials { get; set; }
-        public List<JobViewModel> Jobs { get; set; }
+        public IEnumerable<JobViewModel> Jobs { get; set; }
     }
 }

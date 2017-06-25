@@ -46,7 +46,7 @@ namespace Vera
         {
             schedulingService = new SchedulingService();
             schedulingService.LogFactory = new NLogFactory();
-            schedulingService.At("0 3 * * *").Run<CurrenciesUpdater>(); // 3:00 UTC
+            schedulingService.At("25 16 * * *").Run<CurrenciesUpdater>(); // 16:25 UTC
             schedulingService.Start();
         }
 

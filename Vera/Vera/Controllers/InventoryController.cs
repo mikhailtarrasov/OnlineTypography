@@ -16,7 +16,7 @@ namespace Vera.Controllers
         // GET: Inventory
         public ActionResult Index()
         {
-            var materialsList = db.Materials.ToList();
+            var materialsList = db.Materials.ToList().OrderBy(x => x.Name);
             return View(materialsList);
         }
 

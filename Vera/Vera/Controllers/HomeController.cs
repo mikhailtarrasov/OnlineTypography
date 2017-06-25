@@ -39,7 +39,7 @@ namespace Vera.Controllers
                     Id = x.Id,
                     Name = x.Name + " " + x.Format.Name
                 }), "Id", "Name"),
-                Jobs = jobsList
+                Jobs = jobsList.OrderBy(x => x.JobTitle)
             };
 
             return View(calcViewModel);

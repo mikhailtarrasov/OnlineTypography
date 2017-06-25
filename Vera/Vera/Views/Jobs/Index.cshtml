@@ -1,5 +1,5 @@
 ﻿@*@model IEnumerable<Vera.Domain.Entity.Job>*@
-@model List<Vera.Models.JobViewModel>
+@model IEnumerable<Vera.Models.JobViewModel>
 
 @{
     ViewBag.Title = "Работа";
@@ -14,16 +14,16 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model[0].JobTitle)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().JobTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Cost)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Cost)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].CurrencyName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().CurrencyName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].DependencyName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().DependencyName)
             </th>
             <th></th>
         </tr>

@@ -28,7 +28,7 @@ namespace Vera.Controllers
             {
                 jobsList.Add(MappingJobToJobViewModel(job));
             }
-            return View(jobsList);
+            return View(jobsList.OrderBy(x => x.JobTitle));
         }
 
         //// GET: Jobs/Details/5
